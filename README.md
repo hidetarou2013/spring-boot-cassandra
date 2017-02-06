@@ -20,7 +20,7 @@ bin/cqlsh
 CREATE KEYSPACE IF NOT EXISTS sample WITH replication = {'class':'SimpleStrategy', 'replication_factor':1};
 ```
 
-3. add spring-boot-data-cassandra maven dependency like this sample
+## 3. add spring-boot-data-cassandra maven dependency like this sample
 
 ### add spring-boot-data-cassandra maven dependency
 ```
@@ -30,10 +30,10 @@ CREATE KEYSPACE IF NOT EXISTS sample WITH replication = {'class':'SimpleStrategy
     </dependency>
 ```
 
-4. add properties config "spring.data.cassandra.keyspace-name=sample"
+## 4. add properties config "spring.data.cassandra.keyspace-name=sample"
 
 ```
 spring.data.cassandra.keyspace-name=sample
 ```
 
-5. run spring boot project or run TestCase SampleCassandraApplicationTest for test
+## 5. run spring boot project or run TestCase SampleCassandraApplicationTest for test
