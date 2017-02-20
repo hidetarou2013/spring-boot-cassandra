@@ -1,0 +1,84 @@
+CREATE KEYSPACE IF NOT EXISTS sample WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1'}  AND durable_writes = true;
+
+
+USE sample;
+
+DROP TABLE IF EXISTS sample.hotels;
+CREATE TABLE IF NOT EXISTS sample.hotels (
+    id uuid PRIMARY KEY,
+    name text,
+    address text,
+    zip text,
+    version int
+);
+
+INSERT INTO sample.hotels (id,name,address,zip,version) VALUES (now(),'arai','tokyo-tyoku','110-0001',1);
+INSERT INTO sample.hotels (id,name,address,zip,version) VALUES (now(),'kato','tokyo-bunkyoku','110-0002',1);
+INSERT INTO sample.hotels (id,name,address,zip,version) VALUES (now(),'sato','tokyo-sumidaku','110-0003',1);
+
+SELECT * FROM sample.hotels;
+
+DROP TABLE IF EXISTS sample.MAC000001;
+CREATE TABLE IF NOT EXISTS sample.MAC000001
+(
+	kigyou_cd text,
+	attibute_id text,
+	label_id int,
+	label_name text,
+	color text,
+	parent_label_id int,
+	creat_user_id text,
+	creat_datetime timestamp ,
+	update_user_id text,
+	update_datetime timestamp,
+	ui_assemb_id text,
+	server_assemb_id text,
+	delete_id text,
+	PRIMARY KEY ((kigyou_cd,attibute_id),label_id)
+)
+WITH CLUSTERING ORDER BY (label_id DESC);
+
+CREATE INDEX sample_MAC000001_label_name ON sample.MAC000001 ( label_name );
+
+
+INSERT INTO sample.MAC000001 (kigyou_cd, attibute_id, label_id, label_name, color,parent_label_id,creat_user_id, creat_datetime, update_user_id, update_datetime, ui_assemb_id, server_assemb_id, delete_id) VALUES ('kgyo1', 'kokyaku', 1, 'tokyo','red',0, 'user001','2017-02-08 17:02:56', 'user001', '2017-02-08 17:02:56', 'uiassembid', 'serverassembid', '0');
+INSERT INTO sample.MAC000001 (kigyou_cd, attibute_id, label_id, label_name, color,parent_label_id, creat_user_id,creat_datetime, update_user_id, update_datetime, ui_assemb_id, server_assemb_id, delete_id) VALUES ('kgyo2', 'car', 2, 'nagoya', 'white',0, 'user001','2017-02-08 17:02:56', 'user001', '2017-02-08 17:02:56', 'uiassembid', 'serverassembid', '0');
+INSERT INTO sample.MAC000001 (kigyou_cd, attibute_id, label_id, label_name, color,parent_label_id, creat_user_id,creat_datetime, update_user_id, update_datetime, ui_assemb_id, server_assemb_id, delete_id) VALUES ('kgyo3', 'slip', 3, 'java','blue', 0, 'user001','2017-02-08 17:02:56', 'user001', '2017-02-08 17:02:56', 'uiassembid', 'serverassembid', '0');
+INSERT INTO sample.MAC000001 (kigyou_cd, attibute_id, label_id, label_name, color,parent_label_id, creat_user_id,creat_datetime, update_user_id, update_datetime, ui_assemb_id, server_assemb_id, delete_id) VALUES ('kgyo4', 'slip', 4, 'ihone','black', 0,'user001', '2017-02-08 17:02:56', 'user001', '2017-02-08 17:02:56', 'uiassembid', 'serverassembid', '0');
+
+
+SELECT * FROM sample.MAC000001;
+
+DROP TABLE IF EXISTS sample.TAC000001;
+CREATE TABLE IF NOT EXISTS sample.TAC000001
+(
+	kigyou_cd text,
+	attibute_id text,
+	tag_id int  ,
+	tag_name text ,
+	label_id int,
+	target_id text,
+	creat_user_id text,
+	creat_datetime timestamp ,
+	update_user_id text,
+	update_datetime timestamp,
+	ui_assemb_id text,
+	server_assemb_id text,
+	delete_id text,
+	PRIMARY KEY ((kigyou_cd,attibute_id),tag_id)
+);
+
+CREATE INDEX sample_TAC000001_tag_name ON sample.TAC000001 ( tag_name );
+CREATE INDEX sample_TAC000001_color ON sample.TAC000001 ( color );
+CREATE INDEX sample_TAC000001_target_id ON sample.TAC000001 ( target_id );
+
+INSERT INTO sample.TAC000001 (kigyou_cd,attibute_id,tag_id,tag_name,label_id,target_id,creat_user_id,creat_datetime,update_user_id,update_datetime,ui_assemb_id,server_assemb_id,delete_id) VALUES ('kigyo1','kokyaku',1,'tokyo',1,'KOK00000001','user001','2017-02-08 17:02:56', 'user001', '2017-02-08 17:02:56', 'uiassembid', 'serverassembid', '0');
+INSERT INTO sample.TAC000001 (kigyou_cd,attibute_id,tag_id,tag_name,label_id,target_id,creat_user_id,creat_datetime,update_user_id,update_datetime,ui_assemb_id,server_assemb_id,delete_id) VALUES ('kigyo2','car',2,'nagoya',2,'CAR00000002','user001','2017-02-08 17:02:56', 'user001', '2017-02-08 17:02:56', 'uiassembid', 'serverassembid', '0');
+INSERT INTO sample.TAC000001 (kigyou_cd,attibute_id,tag_id,tag_name,label_id,target_id,creat_user_id,creat_datetime,update_user_id,update_datetime,ui_assemb_id,server_assemb_id,delete_id) VALUES ('kigyo3','slip',3,'java',3,'SLP00000003','user001','2017-02-08 17:02:56', 'user001', '2017-02-08 17:02:56', 'uiassembid', 'serverassembid', '0');
+INSERT INTO sample.TAC000001 (kigyou_cd,attibute_id,tag_id,tag_name,label_id,target_id,creat_user_id,creat_datetime,update_user_id,update_datetime,ui_assemb_id,server_assemb_id,delete_id) VALUES ('kigyo4','rep',3,'iphone',4,'REP00000002','user001','2017-02-08 17:02:56', 'user001', '2017-02-08 17:02:56', 'uiassembid', 'serverassembid', '0');
+
+
+SELECT * FROM sample.TAC000001;
+
+
+
