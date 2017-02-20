@@ -80,5 +80,25 @@ INSERT INTO sample.TAC000001 (kigyou_cd,attibute_id,tag_id,tag_name,label_id,tar
 
 SELECT * FROM sample.TAC000001;
 
+DROP TABLE IF EXISTS sample.memobox;
+CREATE TABLE IF NOT EXISTS sample.memobox (
+    pkey1 text,
+    pkey2 text,
+    id timeuuid,
+    name text,
+    memo text,
+    date timestamp,
+    PRIMARY KEY ((pkey1, pkey2),id,name)
+) WITH CLUSTERING ORDER BY (id DESC,name DESC);
+
+CREATE INDEX sample_memobox_memo ON memobox ( memo );
+
+INSERT INTO memobox (pkey1,pkey2,id,name,memo,date) VALUES ('a','b',now(),'tanaka','greet message1','2016-12-13');
+INSERT INTO memobox (pkey1,pkey2,id,name,memo,date) VALUES ('a','b',now(),'yamamoto','greet message2','2016-12-13');
+
+SELECT * FROM memobox where pkey1='a' and pkey2='b' ORDER BY id;
+
+SELECT * FROM memobox where pkey1='a' and pkey2='b' ORDER BY id,name;
+
 
 
