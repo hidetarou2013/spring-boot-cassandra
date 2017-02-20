@@ -1,0 +1,64 @@
+maekawa@maekawa-PC MINGW64 ~/github/spring-boot-cassandra (maekawa)
+$ curl http://localhost:8081/rest/cassandra/tag -i -XGET
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  1171    0  1171    0     0   6228      0 --:--:-- --:--:-- --:--:--  6228HTTP/1.1 200
+Content-Type: application/json;charset=UTF-8
+Transfer-Encoding: chunked
+Date: Mon, 20 Feb 2017 08:20:24 GMT
+
+[{"kigyouCd":"kigyo4","attibuteId":"rep","tagId":3,"tagName":"iphone","labelId":4,"targetId":"REP00000002","creatDatetime":1486573376000,"creatUserId":"user001","updateUserId":"user001","updateDatetime":1486573376000,"uiAssembId":"uiassembid","serverAssembId":"serverassembid","deleteId":"0"},{"kigyouCd":"kigyo2","attibuteId":"car","tagId":2,"tagName":"nagoya","labelId":2,"targetId":"CAR00000002","creatDatetime":1486573376000,"creatUserId":"user001","updateUserId":"user001","updateDatetime":1486573376000,"uiAssembId":"uiassembid","serverAssembId":"serverassembid","deleteId":"0"},{"kigyouCd":"kigyo3","attibuteId":"slip","tagId":3,"tagName":"java","labelId":3,"targetId":"SLP00000003","creatDatetime":1486573376000,"creatUserId":"user001","updateUserId":"user001","updateDatetime":1486573376000,"uiAssembId":"uiassembid","serverAssembId":"serverassembid","deleteId":"0"},{"kigyouCd":"kigyo1","attibuteId":"kokyaku","tagId":1,"tagName":"tokyo","labelId":1,"targetId":"KOK00000001","creatDatetime":1486573376000,"creatUserId":"user001","updateUserId":"user001","updateDatetime":1486573376000,"uiAssembId":"uiassembid","serverAssembId":"serverassembid","deleteId":"0"}]
+
+maekawa@maekawa-PC MINGW64 ~/github/spring-boot-cassandra (maekawa)
+$ curl http://localhost:8081/rest/cassandra/tag/byname/java -i -XGET
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   292    0   292    0     0  18250      0 --:--:-- --:--:-- --:--:-- 18250HTTP/1.1 200
+Content-Type: application/json;charset=UTF-8
+Transfer-Encoding: chunked
+Date: Mon, 20 Feb 2017 08:20:34 GMT
+
+[{"kigyouCd":"kigyo3","attibuteId":"slip","tagId":3,"tagName":"java","labelId":3,"targetId":"SLP00000003","creatDatetime":1486573376000,"creatUserId":"user001","updateUserId":"user001","updateDatetime":1486573376000,"uiAssembId":"uiassembid","serverAssembId":"serverassembid","deleteId":"0"}]
+
+maekawa@maekawa-PC MINGW64 ~/github/spring-boot-cassandra (maekawa)
+$ curl http://localhost:8081/rest/cassandra/tag/bykeys/kigyo2/car/2 -i -XGET
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   291    0   291    0     0  18187      0 --:--:-- --:--:-- --:--:-- 18187HTTP/1.1 200
+Content-Type: application/json;charset=UTF-8
+Transfer-Encoding: chunked
+Date: Mon, 20 Feb 2017 08:20:49 GMT
+
+{"kigyouCd":"kigyo2","attibuteId":"car","tagId":2,"tagName":"nagoya","labelId":2,"targetId":"CAR00000002","creatDatetime":1486573376000,"creatUserId":"user001","updateUserId":"user001","updateDatetime":1486573376000,"uiAssembId":"uiassembid","serverAssembId":"serverassembid","deleteId":"0"}
+
+maekawa@maekawa-PC MINGW64 ~/github/spring-boot-cassandra (maekawa)
+$
+
+maekawa@maekawa-PC MINGW64 ~/github/spring-boot-cassandra (maekawa)
+$ curl http://localhost:8081/rest/cassandra/tag -i -XPOST -H "Content-Type: application/json" -d "{\"kigyouCd\":\"kigyo5\",\"attibuteId\":\"kokyaku\",\"tagId\":\"5\",\"labelId\":\"5\",\"targetId\":\"KOK00000002\",\"creatDatetime\":\"1482565802817\",\"creatUserId\":\"user001\",\"deleteId\":\"0\",\"tagName\":\"osaka\",\"parentLabelId\":\"0\",\"serverAssembId\":\"serverassembid\",\"uiAssembId\":\"uiassembid\",\"updateDatetime\":\"1482565802817\",\"updateUserId\":\"user001\"}"
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   616    0   294  100   322   3769   4128 --:--:-- --:--:-- --:--:--  4128HTTP/1.1 201
+Location: http://localhost:8081/rest/cassandra/tag/5
+Content-Type: application/json;charset=UTF-8
+Transfer-Encoding: chunked
+Date: Mon, 20 Feb 2017 08:21:28 GMT
+
+{"kigyouCd":"kigyo5","attibuteId":"kokyaku","tagId":5,"tagName":"osaka","labelId":5,"targetId":"KOK00000002","creatDatetime":1482565802817,"creatUserId":"user001","updateUserId":"user001","updateDatetime":1482565802817,"uiAssembId":"uiassembid","serverAssembId":"serverassembid","deleteId":"0"}
+
+maekawa@maekawa-PC MINGW64 ~/github/spring-boot-cassandra (maekawa)
+$
+
+maekawa@maekawa-PC MINGW64 ~/github/spring-boot-cassandra (maekawa)
+$ curl http://localhost:8081/rest/cassandra/tag/edit/5 -i -XPUT -H "Content-Type: application/json" -d "{\"kigyouCd\":\"kigyo5\",\"attibuteId\":\"kokyaku\",\"tagId\":\"5\",\"labelId\":\"5\",\"targetId\":\"KOK00000002,KOK00000003\",\"creatDatetime\":\"1482565802817\",\"creatUserId\":\"user001\",\"deleteId\":\"0\",\"tagName\":\"osaka\",\"parentLabelId\":\"0\",\"serverAssembId\":\"serverassembid\",\"uiAssembId\":\"uiassembid\",\"updateDatetime\":\"1482565802817\",\"updateUserId\":\"user001\"}"
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   640    0   306  100   334  20400  22266 --:--:-- --:--:-- --:--:-- 22266HTTP/1.1 200
+Content-Type: application/json;charset=UTF-8
+Transfer-Encoding: chunked
+Date: Mon, 20 Feb 2017 08:22:13 GMT
+
+{"kigyouCd":"kigyo5","attibuteId":"kokyaku","tagId":5,"tagName":"osaka","labelId":5,"targetId":"KOK00000002,KOK00000003","creatDatetime":1482565802817,"creatUserId":"user001","updateUserId":"user001","updateDatetime":1482565802817,"uiAssembId":"uiassembid","serverAssembId":"serverassembid","deleteId":"0"}
+
+maekawa@maekawa-PC MINGW64 ~/github/spring-boot-cassandra (maekawa)
+$
