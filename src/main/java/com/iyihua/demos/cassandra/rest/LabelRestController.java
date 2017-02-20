@@ -82,7 +82,7 @@ curl http://localhost:8081/rest/cassandra/label -i -XPOST -H "Content-Type: appl
     ResponseEntity<Label> postLabel(@RequestBody Label Label, UriComponentsBuilder uriBuilder) {
     	Label created = service.create(Label);
         URI location = uriBuilder.path("rest/cassandra/Label/{id}")
-                .buildAndExpand(created.getLabel_id()).toUri();
+                .buildAndExpand(created.getLabelId()).toUri();
         return ResponseEntity.created(location).body(created);
     }
 
@@ -93,7 +93,7 @@ curl http://localhost:8081/rest/cassandra/label/edit/5 -i -XPUT -H "Content-Type
     // OK
     @PutMapping(path = "edit/{labelId}")
     Label putLabel(@PathVariable int labelId, @RequestBody Label Label) {
-    	Label.setLabel_id(labelId);
+    	Label.setLabelId(labelId);
         return service.update(Label);
     }
 
