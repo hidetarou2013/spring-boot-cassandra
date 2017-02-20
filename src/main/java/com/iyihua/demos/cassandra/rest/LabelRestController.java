@@ -37,8 +37,8 @@ public class LabelRestController {
 //        return Labels;
 //    }
 
-	// curl http://localhost:8081/rest/cassandra/Label -i -XGET
-	// curl http://localhost:8081/rest/cassandra/Label -i -XGET
+	// curl http://localhost:8081/rest/cassandra/label -i -XGET
+	// curl http://localhost:8081/rest/cassandra/label -i -XGET
 	// OK
 	@GetMapping
 	List<Label> getLabels() {
@@ -47,7 +47,7 @@ public class LabelRestController {
     }
 
 	// 全件抽出
-	// curl http://localhost:8081/rest/cassandra/Label/byname/java -i -XGET
+	// curl http://localhost:8081/rest/cassandra/label/byname/java -i -XGET
 	// OK
 	@GetMapping("byname/{s}")
 	List<Label> findByLabelName(@PathVariable String s) {
@@ -56,7 +56,7 @@ public class LabelRestController {
     }
 
 	// memo指定検索
-	// curl http://localhost:8081/rest/cassandra/Label/bykeys/hoge/hoge/1 -i -XGET
+	// curl http://localhost:8081/rest/cassandra/label/bykeys/kgyo2/car/2 -i -XGET
 	// ?
 	@GetMapping(path = "bykeys/{kigyoCD}/{attibuteId}/{labelI}")
 	Label findByKeys(@PathVariable String kigyoCD,@PathVariable String attibuteId,@PathVariable int labelI) {
@@ -81,7 +81,7 @@ curl http://localhost:8081/rest/cassandra/label -i -XPOST -H "Content-Type: appl
     @PostMapping
     ResponseEntity<Label> postLabel(@RequestBody Label Label, UriComponentsBuilder uriBuilder) {
     	Label created = service.create(Label);
-        URI location = uriBuilder.path("rest/cassandra/Label/{id}")
+        URI location = uriBuilder.path("rest/cassandra/label/{id}")
                 .buildAndExpand(created.getLabelId()).toUri();
         return ResponseEntity.created(location).body(created);
     }
