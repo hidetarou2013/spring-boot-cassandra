@@ -23,14 +23,14 @@ import com.iyihua.demos.cassandra.service.TagService;
 
 
 @RestController
-@RequestMapping("rest/cassandra/tag")
+@RequestMapping("api/1.0/tag/all")
 public class TagRestController {
 
 	@Autowired
 	TagService service;
 
-	// curl http://localhost:8081/rest/cassandra/tag -i -XGET
-	// curl http://localhost:8081/rest/cassandra/tag -i -XGET
+	// curl http://localhost:8081/api/1.0/tag/all -i -XGET
+	// curl http://localhost:8081/api/1.0/tag/all -i -XGET
 	// OK
 	@GetMapping
 	List<Tag> getTags() {
@@ -39,7 +39,7 @@ public class TagRestController {
     }
 
 	// 全件抽出
-	// curl http://localhost:8081/rest/cassandra/tag/byname/java -i -XGET
+	// curl http://localhost:8081/api/1.0/tag/all/byname/java -i -XGET
 	// OK
 	@GetMapping("byname/{s}")
 	List<Tag> findByTagName(@PathVariable String s) {
@@ -48,7 +48,7 @@ public class TagRestController {
     }
 
 	// memo指定検索
-	// curl http://localhost:8081/rest/cassandra/tag/bykeys/kigyo2/car/2 -i -XGET
+	// curl http://localhost:8081/api/1.0/tag/all/bykeys/kigyo2/car/2 -i -XGET
 	// ?
 	@GetMapping(path = "bykeys/{kigyoCD}/{attibuteId}/{TagI}")
 	Tag findByKeys(@PathVariable String kigyoCD,@PathVariable String attibuteId,@PathVariable int TagI) {
@@ -57,7 +57,7 @@ public class TagRestController {
     }
 
 	// 選択
-	// curl http://localhost:8081/rest/cassandra/tag/bykeys/kgyo2/car/2 -i -XGET
+	// curl http://localhost:8081/api/1.0/tag/all/bykeys/kgyo2/car/2 -i -XGET
 	// OK
 	@GetMapping(path = "findOne/{kigyoCD}/{attibuteId}/{TagI}")
     Tag findOne(@PathVariable String kigyoCD,@PathVariable String attibuteId,@PathVariable int TagI) {
@@ -67,20 +67,20 @@ public class TagRestController {
 
     // 新規登録
 	/*
-curl http://localhost:8081/rest/cassandra/tag -i -XPOST -H "Content-Type: application/json" -d "{\"kigyou_cd\":\"kgyo5\",\"attibute_id\":\"kokyaku\",\"Tag_id\":\"5\",\"color\":\"white\",\"creat_datetime\":\"1482565802817\",\"creat_user_id\":\"user001\",\"delete_id\":\"0\",\"Tag_name\":\"osaka\",\"parent_Tag_id\":\"0\",\"server_assemb_id\":\"serverassembid\",\"ui_assemb_id\":\"uiassembid\",\"update_datetime\":\"1482565802817\",\"update_user_id\":\"user001\"}"
+curl http://localhost:8081/api/1.0/tag/all -i -XPOST -H "Content-Type: application/json" -d "{\"kigyou_cd\":\"kgyo5\",\"attibute_id\":\"kokyaku\",\"Tag_id\":\"5\",\"color\":\"white\",\"creat_datetime\":\"1482565802817\",\"creat_user_id\":\"user001\",\"delete_id\":\"0\",\"Tag_name\":\"osaka\",\"parent_Tag_id\":\"0\",\"server_assemb_id\":\"serverassembid\",\"ui_assemb_id\":\"uiassembid\",\"update_datetime\":\"1482565802817\",\"update_user_id\":\"user001\"}"
 	 */
 	// OK
     @PostMapping
     ResponseEntity<Tag> postTag(@RequestBody Tag Tag, UriComponentsBuilder uriBuilder) {
     	Tag created = service.create(Tag);
-        URI location = uriBuilder.path("rest/cassandra/tag/{id}")
+        URI location = uriBuilder.path("api/1.0/tag/all/{id}")
                 .buildAndExpand(created.getTagId()).toUri();
         return ResponseEntity.created(location).body(created);
     }
 
     // 更新
     /*
-curl http://localhost:8081/rest/cassandra/tag/edit/5 -i -XPUT -H "Content-Type: application/json" -d "{\"kigyou_cd\":\"kgyo5\",\"attibute_id\":\"kokyaku\",\"Tag_id\":\"5\",\"color\":\"red\",\"creat_datetime\":\"1482565802817\",\"creat_user_id\":\"user001\",\"delete_id\":\"0\",\"Tag_name\":\"osaka\",\"parent_Tag_id\":\"0\",\"server_assemb_id\":\"serverassembid\",\"ui_assemb_id\":\"uiassembid\",\"update_datetime\":\"1482565802817\",\"update_user_id\":\"user001\"}"
+curl http://localhost:8081/api/1.0/tag/all/edit/5 -i -XPUT -H "Content-Type: application/json" -d "{\"kigyou_cd\":\"kgyo5\",\"attibute_id\":\"kokyaku\",\"Tag_id\":\"5\",\"color\":\"red\",\"creat_datetime\":\"1482565802817\",\"creat_user_id\":\"user001\",\"delete_id\":\"0\",\"Tag_name\":\"osaka\",\"parent_Tag_id\":\"0\",\"server_assemb_id\":\"serverassembid\",\"ui_assemb_id\":\"uiassembid\",\"update_datetime\":\"1482565802817\",\"update_user_id\":\"user001\"}"
      */
     // OK
     @PutMapping(path = "edit/{TagId}")
@@ -90,7 +90,7 @@ curl http://localhost:8081/rest/cassandra/tag/edit/5 -i -XPUT -H "Content-Type: 
     }
 
     // 削除
-    // curl http://localhost:8081/rest/cassandra/tag/delete/kigyo5/kokyaku/5 -i -XDELETE
+    // curl http://localhost:8081/api/1.0/tag/all/delete/kigyo5/kokyaku/5 -i -XDELETE
     // OK
     @DeleteMapping(path = "delete/{kigyoCD}/{attibuteId}/{TagId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

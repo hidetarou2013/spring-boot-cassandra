@@ -1,0 +1,500 @@
+  155  git reset
+  156  git status
+  157  git diff
+  158  git reset --hard
+  159  git status
+  160  git diff
+  161  cat .git/config
+  162  git status
+  163  git push origin maekawa:maekawa
+  164  npm -v
+  165  ll
+  166  npm start
+  167  git status
+  168  git diff
+  169  git reset ^^hard
+  170  git reset --hard
+  171  git diff
+  172  git clone git@bitbucket.org:eit_docker/calcapp.git
+  173  ll
+  174  cd calcapp/
+  175  git checkout -b maekawa
+  176  atom .
+  177  ll
+  178  npm init
+  179  npm install angular-cli --save
+  180  ls
+  181  cat angular-cli.json 
+  182  ll
+  183  cat package.json 
+  184  npm init
+  185  npm install angular-cli --save
+  186  npm i --save intl bootstrap
+  187  node -v
+  188  npm -v
+  189  ng serve
+  190  npm install
+  191  ng serve
+  192  ll
+  193  ls -l  src
+  194  ng 
+  195  ng help
+  196  ng serve
+  197  git status
+  198  cat .git/config
+  199  git add -A
+  200  git status
+  201  git reset --hard
+  202  git status
+  203  pwd
+  204  cd ..
+  205  git init
+  206  git remote add origin git@bitbucket.org:eit201701/ang2sample01.git
+  207  git status
+  208  git status
+  209  git add -A
+  210  git commit -m "refs #1 Initial Commit create by eclipse"
+  211  git push origin master
+  212  git remote add origin_github git@github.com:hidetarou2013/Ang2Sample01.git
+  213  git push origin_github master
+  214  git status
+  215  git fetch origin
+  216  node -v
+  217  npm -v
+  218  which npm
+  219  which node
+  220  which ng
+  221  ng -v
+  222  ng --version
+  223  git status
+  224  git checkout maekawa
+  225  git checkout -b maekawa
+  226  git status
+  227  ll
+  228  npm install --save intl bootstrap
+  229  npm init
+  230  node init
+  231  npm init
+  232  npm install --save intl bootstrap
+  233  ll
+  234  ll
+  235  ng serve
+  236  node -v
+  237  ng serve
+  238  node -v
+  239  npm -v
+  240  npm install --save intl bootstrap
+  241  ng serve
+  242  npm install --save intl bootstrap
+  243  ng serve
+  244  ng set --global warnings.packageDeprecation=false
+  245  npm install angular-cli
+  246  ng set --global warnings.packageDeprecation=false
+  247  ng serve
+  248  ll
+  249  ng serve
+  250  ng init
+  251  ng serve
+  252  ng serve
+  253  ll
+  254  cd src
+  255  ng serve
+  256  cd ..
+  257  ll
+  258  ng serve
+  259  node -v
+  260  npm -v
+  261  ll
+  262  ng serve
+  263  cd src/
+  264  ll
+  265  ng serve
+  266  cd app/
+  267  ng serve
+  268  cd ../../
+  269  ll
+  270  ng build --prod
+  271  ll
+  272  npm install
+  273  npm start
+  274  ll
+  275  cat package.json 
+  276  apm 
+  277  apm -v
+  278  node -v
+  279  npm -v
+  280  git status
+  281  cat .git/config
+  282  git status
+  283  git fetch origin
+  284  ll
+  285  cat .gitignore 
+  286  ll
+  287  git add -A
+  288  ll
+  289  git status
+  290  git commit -m "refs #1 add file"
+  291  git status
+  292  git push origin maekawa
+  293  cd ..
+  294  ll
+  295  npm init
+  296  pwd
+  297  ll
+  298  ll
+  299  ll | sed -e 's/(.*)月  //g'
+  300  ll | sed -e 's/(.*)月 //g'
+  301  ll | sed -e 's/(.*)月 (.*)/\2/g'
+  302  ll | sed -e 's/(.*)月 (.*)/$2/g'
+  303  ll | sed -e 's/197121/aaa/g'
+  304  ll | sed -e 's/(.*)月 (.*)/$2/g'
+  305  ll
+  306  ll | sed -e 's/(.*) hide//g'
+  307  ll | sed -e 's/(.*) hide //g'
+  308  ll | sed -e 's/hide //g'
+  309  ll
+  310  ll | sed -e 's/hide 197121//g'
+  311  ll | sed -e 's/hide 197121 [0-9]+//g'
+  312  ll | sed -E 's/hide 197121 [0-9]+//g'
+  313  ll | sed -e 's/hide 197121//g'
+  314  ll | sed -E 's/hide 197121//g'
+  315  ll | sed -E 's/hide 197121 [0-9]+//g'
+  316  ll | sed -E 's/hide 197121 [0-9]+ //g'
+  317  ll | sed -E 's/hide 197121 +[0-9]+ //g'
+  318  ll | sed -E 's/hide 197121 +[0-9]+ [0-9]+月//g'
+  319  ll | sed -E 's/hide 197121 +[0-9]+ [0-9]+月 +//g'
+  320  ll | sed -E 's/hide 197121 +[0-9]+ [0-9]+月 + [0-9]+ //g'
+  321  ll | sed -E 's/hide 197121 +[0-9]+ [0-9]+月 + [0-9]+ [0-9]+//g'
+  322  ll | sed -E 's/hide 197121 +[0-9]+ [0-9]+月 + [0-9]+ [0-9]+://g'
+  323  ll | sed -E 's/hide 197121 +[0-9]+ [0-9]+月 + [0-9]+ [0-9]+:[0-9]+//g'
+  324  ll | sed -E 's/hide 197121 +[0-9]+ [0-9]+月 + [0-9]+ [0-9]+:[0-9]+ +//g'
+  325  ll | sed -E 's/hide 197121 +[0-9]+ [0-9]+月 + [0-9]+ [0-9]+:[0-9]+ +//g'
+  326  ll | sed -E 's/[drwx-]+ hide 197121 +[0-9]+ [0-9]+月 + [0-9]+ [0-9]+:[0-9]+ +//g'
+  327  ll | sed -E 's/[drwx]+ hide 197121 +[0-9]+ [0-9]+月 + [0-9]+ [0-9]+:[0-9]+ +//g'
+  328  ll | sed -E 's/(.+) hide 197121 +[0-9]+ [0-9]+月 + [0-9]+ [0-9]+:[0-9]+ +//g'
+  329  ll
+  330  ll | sed -E 's/(.+) hide 197121 +[0-9]+ [0-9]+月 + [0-9]+ [0-9]+:[0-9]+ +//g'
+  331  ll
+  332  npm run
+  333  cd ../angular2-tour-of-heroes.wiki/
+  334  git status
+  335  git add -A
+  336  git commit -m "edit 02/11"
+  337  git push origin master
+  338  git status
+  339  git add -A
+  340  git commit -m "edit 02/11"
+  341  git push origin master
+  342  git status
+  343  git add -A
+  344  git commit -m "edit 02/13"
+  345  git push origin master
+  346  git status
+  347  git fetch origin
+  348  which apm
+  349  which node
+  350  which npm
+  351  node -v
+  352  npm -v
+  353  npm -v
+  354  npm -v
+  355  node -v
+  356  node -v
+  357  npm -v
+  358  apm -v
+  359  ll
+  360  npm install
+  361  npm start
+  362  npm test
+  363  ll
+  364  pwd
+  365  ls -l app
+  366  pwd
+  367  ll
+  368  which apm
+  369  echo $PATH
+  370  apm -v
+  371  ll
+  372  ls -la
+  373  cat .gitignore 
+  374  atom
+  375  pwd
+  376  ls -la
+  377  ll
+  378  git init
+  379  git status
+  380  git add -A
+  381  git status
+  382  git commit -m "initial commit"
+  383  git status
+  384  git remote add origin git@github.com:hidetarou2013/.atom.git
+  385  git remote add origin_bitbucket git@bitbucket.org:hidetarou2013/.atom.git
+  386  git push origin master
+  387  ll
+  388  ls -la
+  389  git status
+  390  git push origin master
+  391  git push -u origin master
+  392  git remote add origin git@github.com:hidetarou2013/.atom.git
+  393  git push -u origin master
+  394  git push -u origin_bitbucket master
+  395  git config --add remote.all.url git@github.com:hidetarou2013/.atom.git
+  396  git config --add remote.all.url git@bitbucket.org:hidetarou2013/.atom.git
+  397  git push all master
+  398  git commit -m "Initial commit"
+  399  git push all master
+  400  git status
+  401  git status
+  402  git
+  403  git status
+  404  git add -A
+  405  git commit -m "refs #1 add browser-plus"
+  406  git push all master
+  407  git status
+  408  git status
+  409  git add -A
+  410  git commit -m "refs #1 add some package"
+  411  git push all master
+  412  cat .git/cinfig
+  413  cat .git/config 
+  414  git status
+  415  git fetch origin
+  416  git pull origin master
+  417  git status
+  418  git add -A
+  419  git commit -m "refs #1 modified api-docs"
+  420  git push all master
+  421  git status
+  422  git status
+  423  git fetch origin
+  424  git pull origin master
+  425  git fetch origin
+  426  git pull origin master
+  427  git status
+  428  git diff
+  429  git fetch origin
+  430  git add -A
+  431  git commit -m "refs #1 modified config.cson minimap"
+  432  git push all master
+  433  git fetch origin
+  434  git status
+  435  git pull origin master
+  436  apm
+  437  apm install json-level-color
+  438  apm install todo-show
+  439  git status
+  440  git add -A
+  441  git commit -m "refs #1 add todo-show"
+  442  git push all master
+  443  apm install expose
+  444  git add -A
+  445  git commit -m "refs #1 add expose"
+  446  git push all master
+  447  node -v
+  448  npm -v
+  449  apm -v
+  450  which node
+  451  which apm
+  452  ls -l /c/Users/hide/AppData/Local/atom/bin
+  453  ll
+  454  git fetch origin
+  455  git pull origin master
+  456  git fetch origin
+  457  git status
+  458  pwd
+  459  git pull origin master
+  460  git status
+  461  git fetch origin
+  462  git pull origin master
+  463  git fetch origin
+  464  git status
+  465  git fetch origin
+  466  git add -A
+  467  git commit -m "refs #1 02/11 add"
+  468  got push origin master
+  469  git push origin master
+  470  git clone git@github.com:hidetarou2013/spring-boot-security-rest-thymleaf-angularjs-bootstrap-jasperreports-jpa-seed.git
+  471  cd /c/Users/hide/github/SpringDataBaseSample
+  472  cd /c/Users/hide/github/spring-boot-security-rest-thymleaf-angularjs-bootstrap-jasperreports-jpa-seed
+  473  git status
+  474  git checkout -b develop
+  475  git checkout -b feature/maekawa
+  476  git push origin develop:develop
+  477  git push origin feature/maekawa:feature/maekawa
+  478  curl http://localhost:8080/rest/city
+  479  curl http://localhost:8080/rest/Moscow/country
+  480  curl http://localhost:8080/rest/Moscow/country
+  481  curl http://localhost:8080/rest/1/country
+  482  curl http://localhost:8080/rest/2/country
+  483  curl http://localhost:8080/rest/city
+  484  curl http://localhost:8080/rest/city/1
+  485  curl http://localhost:8080/rest/city/Washington
+  486  curl http://localhost:8080/rest/city/Washington/country
+  487  curl http://localhost:8080/rest/city/New York/country
+  488  curl http://localhost:8080/rest/city/"New York"/country
+  489  curl http://localhost:8080/rest/city/Washington/country
+  490  curl http://localhost:8080/rest/city/Moscow/country
+  491  http://localhost:8080/ajax/report
+  492  http://localhost:8080/ajax/report
+  493  pwd
+  494  git status
+  495  git fetch origin
+  496  cat .git/config
+  497  git status
+  498  git add -A
+  499  git commit -m "edit file"
+  500  git push origin feature/maekawa
+  501  git clone git@github.com:hidetarou2013/spring-boot-cassandra.git
+  502  cd spring-boot-cassandra/
+  503  cat .git/config
+  504  git status
+  505  git checkout -b maekawa
+  506  which curl
+  507  curl http://localhost:8081/rest/cassandra/hotel -i -XGET
+  508  git status
+  509  git status
+  510  git add -A
+  511  git commit -m "by maekawa"
+  512  git push origin maekawa
+  513  curl http://localhost:8081/rest/cassandra/memobox -i -XGET
+  514  curl http://localhost:8081/rest/cassandra/memobox/byname -i -XGET
+  515  curl http://localhost:8081/rest/cassandra/memobox -i -XPOST -H "Content-Type: application/json"
+  516       -d "{\"pkey1\":\"a\",\"pkey2\":\"b\",\"id\":\"93d5db10-c9ad-11e6-b26a-27c9d3fa31b8\",\"name\":\"asai\",\"memo\":\"memo1\",\"date\":\"1482565802817\"}"
+  517  curl http://localhost:8081/rest/cassandra/memobox -i -XPOST -H "Content-Type: application/json" -d "{\"pkey1\":\"a\",\"pkey2\":\"b\",\"id\":\"93d5db10-c9ad-11e6-b26a-27c9d3fa31b8\",\"name\":\"asai\",\"memo\":\"memo1\",\"date\":\"1482565802817\"}"
+  518  curl http://localhost:8081/rest/cassandra/memobox -i -XPOST -H "Content-Type: application/json" -d "{\"pkey1\":\"a\",\"pkey2\":\"b\",\"id\":\"93d5db10-c9ad-11e6-b26a-27c9d3fa31b8\",\"name\":\"asai\",\"memo\":\"memo1\",\"date\":\"1482565802817\"}"
+  519  curl http://localhost:8081/rest/cassandra/memobox/4622f8d0-c8bd-11e6-b218-2f92b65bfc29 -i -XPUT -H "Content-Type: application/json" -d "{\"pkey1\":\"a\",\"pkey2\":\"b\",\"id\":\"4622f8d0-c8bd-11e6-b218-2f92b65bfc29\",\"name\":\"tanaka\",\"memo\":\"greet messageA\",\"date\":\"1482565233349\"}"
+  520  curl http://localhost:8081/rest/cassandra/memobox/749580d0-f72e-11e6-a3af-2d237e461979 -i -XPUT -H "Content-Type: application/json" -d "{\"pkey1\":\"a\",\"pkey2\":\"b\",\"id\":\"749580d0-f72e-11e6-a3af-2d237e461979\",\"name\":\"tanaka\",\"memo\":\"greet messageA\",\"date\":\"1482565233349\"}"
+  521  curl http://localhost:8081/rest/cassandra/memobox/749580d0-f72e-11e6-a3af-2d237e461979 -i -XPUT -H "Content-Type: application/json" -d "{\"pkey1\":\"a\",\"pkey2\":\"b\",\"id\":\"749580d0-f72e-11e6-a3af-2d237e461979\",\"name\":\"tanaka\",\"memo\":\"greet messageA\",\"date\":\"1482565233349\"}"
+  522  curl http://localhost:8081/rest/cassandra/memobox/749580d0-f72e-11e6-a3af-2d237e461979 -i -XDELETE
+  523  curl http://localhost:8081/rest/cassandra/Label -i -XGET
+  524  curl http://localhost:8081/rest/cassandra/label -i -XGET
+  525  curl http://localhost:8081/rest/cassandra/Label/byname/java -i -XGET
+  526  curl http://localhost:8081/rest/cassandra/label/byname/java -i -XGET
+  527  curl http://localhost:8081/rest/cassandra/label/bykeys/kgyo2/car/2 -i -XGET
+  528  curl http://localhost:8081/rest/cassandra/label -i -XPOST -H "Content-Type: application/json" -d "{\"kigyou_cd\":\"kgyo5\",\"attibute_id\":\"kokyaku\",\"label_id\":\"5\",\"color\":\"white\",\"creat_datetime\":\"1482565802817\",\"creat_user_id\":\"user001\",\"delete_id\":\"0\",\"label_name\":\"osaka\",\"parent_label_id\":\"0\",\"server_assemb_id\":\"serverassembid\",\"ui_assemb_id\":\"uiassembid\",\"update_datetime\":\"1482565802817\",\"update_user_id\":\"user001\"}"
+  529  curl http://localhost:8081/rest/cassandra/label/edit/5 -i -XPUT -H "Content-Type: application/json" -d "{\"kigyou_cd\":\"kgyo5\",\"attibute_id\":\"kokyaku\",\"label_id\":\"5\",\"color\":\"red\",\"creat_datetime\":\"1482565802817\",\"creat_user_id\":\"user001\",\"delete_id\":\"0\",\"label_name\":\"osaka\",\"parent_label_id\":\"0\",\"server_assemb_id\":\"serverassembid\",\"ui_assemb_id\":\"uiassembid\",\"update_datetime\":\"1482565802817\",\"update_user_id\":\"user001\"}"
+  530  curl http://localhost:8081/rest/cassandra/label/delete/kgyo5/kokyaku/5 -i -XDELETE
+  531  git status
+  532  git add -A
+  533  git commit -m "add Label"
+  534  git push origin maekawa
+  535  curl http://localhost:8081/rest/cassandra/label -i -XGET
+  536  curl http://localhost:8081/rest/cassandra/label/byname/java -i -XGET
+  537  curl http://localhost:8081/rest/cassandra/label/bykeys/kgyo2/car/2 -i -XGET
+  538  curl http://localhost:8081/rest/cassandra/label -i -XPOST -H "Content-Type: application/json" -d "{\"kigyou_cd\":\"kgyo5\",\"attibute_id\":\"kokyaku\",\"label_id\":\"5\",\"color\":\"white\",\"creat_datetime\":\"1482565802817\",\"creat_user_id\":\"user001\",\"delete_id\":\"0\",\"label_name\":\"osaka\",\"parent_label_id\":\"0\",\"server_assemb_id\":\"serverassembid\",\"ui_assemb_id\":\"uiassembid\",\"update_datetime\":\"1482565802817\",\"update_user_id\":\"user001\"}"
+  539  curl http://localhost:8081/rest/cassandra/label -i -XPOST -H "Content-Type: application/json" -d "{\"kigyouCd\":\"kgyo5\",\"attibuteId\":\"kokyaku\",\"labelId\":\"5\",\"color\":\"white\",\"creatDatetime\":\"1482565802817\",\"creatUserId\":\"user001\",\"deleteId\":\"0\",\"labelName\":\"osaka\",\"parentLabelId\":\"0\",\"serverAssembId\":\"serverassembid\",\"uiAssembId\":\"uiassembid\",\"updateDatetime\":\"1482565802817\",\"updateUserId\":\"user001\"}"
+  540  curl http://localhost:8081/rest/cassandra/label -i -XPUT -H "Content-Type: application/json" -d "{\"kigyouCd\":\"kgyo5\",\"attibuteId\":\"kokyaku\",\"labelId\":\"5\",\"color\":\"red\",\"creatDatetime\":\"1482565802817\",\"creatUserId\":\"user001\",\"deleteId\":\"0\",\"labelName\":\"osaka\",\"parentLabelId\":\"0\",\"serverAssembId\":\"serverassembid\",\"uiAssembId\":\"uiassembid\",\"updateDatetime\":\"1482565802817\",\"updateUserId\":\"user001\"}"
+  541  curl http://localhost:8081/rest/cassandra/label/edit/5 -i -XPUT -H "Content-Type: application/json" -d "{\"kigyouCd\":\"kgyo5\",\"attibuteId\":\"kokyaku\",\"labelId\":\"5\",\"color\":\"red\",\"creatDatetime\":\"1482565802817\",\"creatUserId\":\"user001\",\"deleteId\":\"0\",\"labelName\":\"osaka\",\"parentLabelId\":\"0\",\"serverAssembId\":\"serverassembid\",\"uiAssembId\":\"uiassembid\",\"updateDatetime\":\"1482565802817\",\"updateUserId\":\"user001\"}"
+  542  git status
+  543  git add -A
+  544  git commit -m "modified CamelCase on Entity Label"
+  545  git push origin maekawa
+  546  curl http://localhost:8081/rest/cassandra/tag -i -XGET
+  547  curl http://localhost:8081/rest/cassandra/tag -i -XGET
+  548  curl http://localhost:8081/rest/cassandra/tag/byname/java -i -XGET
+  549  curl http://localhost:8081/rest/cassandra/tag/bykeys/kgyo2/car/2 -i -XGET
+  550  curl http://localhost:8081/rest/cassandra/tag/bykeys/kigyo2/car/2 -i -XGET
+  551  curl http://localhost:8081/rest/cassandra/label/bykeys/kigyo2/car/2 -i -XGET
+  552  curl http://localhost:8081/rest/cassandra/label/bykeys/kgyo2/car/2 -i -XGET
+  553  curl http://localhost:8081/rest/cassandra/tag -i -XPOST -H "Content-Type: application/json" -d "{\"kigyouCd\":\"kigyo5\",\"attibuteId\":\"kokyaku\",\"tagId\":\"5\",\"labelId\":\"5\",\"creatDatetime\":\"1482565802817\",\"creatUserId\":\"user001\",\"deleteId\":\"0\",\"tagName\":\"osaka\",\"parentLabelId\":\"0\",\"serverAssembId\":\"serverassembid\",\"uiAssembId\":\"uiassembid\",\"updateDatetime\":\"1482565802817\",\"updateUserId\":\"user001\"}"
+  554  curl http://localhost:8081/rest/cassandra/tag/edit/5 -i -XPUT -H "Content-Type: application/json" -d "{\"kigyouCd\":\"kigyo5\",\"attibuteId\":\"kokyaku\",\"tagId\":\"5\",\"labelId\":\"5\",\"targetId\":\"KOK00000002,KOK00000003\",\"creatDatetime\":\"1482565802817\",\"creatUserId\":\"user001\",\"deleteId\":\"0\",\"tagName\":\"osaka\",\"parentLabelId\":\"0\",\"serverAssembId\":\"serverassembid\",\"uiAssembId\":\"uiassembid\",\"updateDatetime\":\"1482565802817\",\"updateUserId\":\"user001\"}"
+  555  curl http://localhost:8081/rest/cassandra/tag/delete/kigyo5/kokyaku/5 -i -XDELETE
+  556  git status
+  557  git add -A
+  558  git commit -m "add Tag CamelCase CRUD"
+  559  git status
+  560  git push origin maekawa
+  561  pwd
+  562  ll
+  563  history
+  564  history > history20170220.txt
+  565  curl http://localhost:8081/rest/cassandra/tag -i -XGET
+  566  curl http://localhost:8081/rest/cassandra/tag/byname/java -i -XGET
+  567  curl http://localhost:8081/rest/cassandra/tag/bykeys/kigyo2/car/2 -i -XGET
+  568  curl http://localhost:8081/rest/cassandra/tag -i -XPOST -H "Content-Type: application/json" -d "{\"kigyouCd\":\"kigyo5\",\"attibuteId\":\"kokyaku\",\"tagId\":\"5\",\"labelId\":\"5\",\"targetId\":\"KOK00000002\",\"creatDatetime\":\"1482565802817\",\"creatUserId\":\"user001\",\"deleteId\":\"0\",\"tagName\":\"osaka\",\"parentLabelId\":\"0\",\"serverAssembId\":\"serverassembid\",\"uiAssembId\":\"uiassembid\",\"updateDatetime\":\"1482565802817\",\"updateUserId\":\"user001\"}"
+  569  curl http://localhost:8081/rest/cassandra/tag/edit/5 -i -XPUT -H "Content-Type: application/json" -d "{\"kigyouCd\":\"kigyo5\",\"attibuteId\":\"kokyaku\",\"tagId\":\"5\",\"labelId\":\"5\",\"targetId\":\"KOK00000002,KOK00000003\",\"creatDatetime\":\"1482565802817\",\"creatUserId\":\"user001\",\"deleteId\":\"0\",\"tagName\":\"osaka\",\"parentLabelId\":\"0\",\"serverAssembId\":\"serverassembid\",\"uiAssembId\":\"uiassembid\",\"updateDatetime\":\"1482565802817\",\"updateUserId\":\"user001\"}"
+  570  git status
+  571  git add -A
+  572  git commit -m "curl tag"
+  573  git push origin maekawa
+  574  git status
+  575  cat .git/config
+  576  git remote add origin_bitbucket ssh://git@bitbucket.org/eit201701/spring-boot-cassandra.git
+  577  git push origin_bitbucket master:master
+  578  git push origin_bitbucket maekawa:maekawa
+  579  git checkout develop
+  580  git checkout -b develop
+  581  git push all develop
+  582  git checkout maekawa
+  583  git status
+  584  curl http://localhost:8081/api/1.0/label/all -i -XGET
+  585  curl http://localhost:8081/api/1.0/label/all/byname/java -i -XGET
+  586  curl http://localhost:8081/api/1.0/label/all/bykeys/kgyo2/car/2 -i -XGET
+  587  curl http://localhost:8081/api/1.0/label/all/?kigyou_cd=kgyo2&attibute_id=car&label_id=2 -i -XGET
+  588  curl http://localhost:8081/api/1.0/label/all/?kigyou_cd=kgyo2&attibute_id=car&label_id=2 -i -XGET
+  589  curl http://localhost:8081/api/1.0/label/all/?kigyou_cd=kgyo2&attibute_id=car&label_id=2 -i -XGET
+  590  curl http://localhost:8081/api/1.0/label/all/?kigyou_cd=kgyo2&attibute_id=car&label_id=2 -i -XGET
+  591  curl http://localhost:8081/api/1.0/label/all/test/?kigyou_cd=kgyo2&attibute_id=car&label_id=2 -i -XGET
+  592  curl http://localhost:8081/api/1.0/label/all/?kigyou_cd=kgyo2&attibute_id=car&label_id=2 -i -XGET
+  593  curl http://localhost:8081/api/1.0/label/all/test?kigyou_cd=kgyo2&attibute_id=car&label_id=2 -i -XGET
+  594  curl http://localhost:8081/api/1.0/label/all/test?kigyou_cd=kgyo2&attibute_id=car&label_id=2 -i -XGET
+  595  curl http://localhost:8081/api/1.0/label/alltest?kigyou_cd=kgyo2&attibute_id=car&label_id=2 -i -XGET
+  596  curl http://localhost:8081/api/1.0/label/alltest?kigyou_cd=kgyo2&attibute_id=car&label_id=2 -i -XGET
+  597  curl http://localhost:8081/api/1.0/label/all/?kigyou_cd=kgyo2&attibute_id=car&label_id=2 -i -XGET
+  598  curl http://localhost:8081/api/1.0/label/all/?kigyou_cd=kgyo2&attibute_id=car&label_id=2 -i -XGET
+  599  curl http://localhost:8081/api/1.0/label/all/?kigyou_cd=kgyo2&attibute_id=car&label_id=2 -i -XGET
+  600  curl http://localhost:8081/api/1.0/label/all/?kigyou_cd=kgyo2&attibute_id=car&label_id=2 -i -XGET
+  601  curl http://localhost:8081/api/1.0/label/all/test?kigyou_cd=kgyo2&attibute_id=car&label_id=2 -i -XGET
+  602  curl http://localhost:8081/api/1.0/label/all/test/?kigyou_cd=kgyo2&attibute_id=car&label_id=2 -i -XGET
+  603  curl http://localhost:8081/api/1.0/label/all/test/kigyou_cd=kgyo2&attibute_id=car&label_id=2 -i -XGET
+  604  curl http://localhost:8081/api/1.0/label/all/test/?kigyou_cd=kgyo2&attibute_id=car&label_id=2 -i -XGET
+  605  curl http://localhost:8081/api/1.0/label/all/test?kigyou_cd=kgyo2&attibute_id=car&label_id=2 -i -XGET
+  606  curl http://localhost:8081/api/1.0/label/all/bykeys/kgyo2/car/2 -i -XGET
+  607  curl http://localhost:8081/api/1.0/label/all/test?kigyou_cd=kgyo2&attibute_id=car&label_id=2 -i -XGET
+  608  curl http://localhost:8081/api/1.0/label/all/test?kigyou_cd=kgyo2&attibute_id=car&label_id=2 -i -XGET
+  609  curl http://localhost:8081/api/1.0/label/all/test/?kigyou_cd=kgyo2&attibute_id=car&label_id=2 -i -XGET
+  610  curl http://localhost:8081/api/1.0/label/all/test?kigyou_cd=kgyo2&attibute_id=car&label_id=2 -i -XGET
+  611  curl http://localhost:8081/api/1.0/label/all/test/?kigyou_cd=kgyo2&attibute_id=car&label_id=2 -i -XGET
+  612  curl http://localhost:8081/api/1.0/label/all/test/?kigyou_cd=kgyo2&attibute_id=car&label_id=2 -i -XGET
+  613  curl http://localhost:8081/api/1.0/label/all?kigyou_cd=kgyo2&attibute_id=car&label_id=2 -i -XGET
+  614  curl http://localhost:8081/api/1.0/label/all/?kigyou_cd=kgyo2&attibute_id=car&label_id=2 -i -XGET
+  615  curl http://localhost:8081/api/1.0/label/all?kigyou_cd=kgyo2&attibute_id=car&label_id=2 -i -XGET
+  616  curl http://localhost:8081/api/1.0/label/all?kigyou_cd=kgyo2&attibute_id=car&label_id=2 -i -XGET
+  617  curl http://localhost:8081/api/1.0/label/all?kigyou_cd=kgyo2&attibute_id=car&label_id=2 -i -XGET
+  618  curl http://localhost:8081/api/1.0/label/all?kigyou_cd=kgyo2&attibute_id=car&label_id=2 -i -XGET
+  619  curl "http://localhost:8081/api/1.0/label/all?kigyou_cd=kgyo2&attibute_id=car&label_id=2" -i -XGET
+  620  curl "http://localhost:8081/api/1.0/label/all?kigyou_cd=kgyo2&attibute_id=car&label_id=2" -i -XGET
+  621  curl "http://localhost:8081/api/1.0/label/all?kigyou_cd=kgyo2&attibute_id=car&label_id=2" -i -XGET
+  622  curl http://localhost:8081/api/1.0/label/all/?c={g1:["kigyou_cd:eq:kgyo2","attibute_id:eq:car","label_id:eq:2"]} -i -XGET
+  623  curl http://localhost:8081/api/1.0/label/all/?c={g1:["kigyou_cd:eq:kgyo2","attibute_id:eq:car","label_id:eq:2"]} -i -XGET
+  624  curl http://localhost:8081/api/1.0/label/all/?c={g1:["kigyou_cd:eq:kgyo2"]} -i -XGET
+  625  curl http://localhost:8081/api/1.0/label/all/?c={g1:["kigyou_cd:eq:kgyo2"]} -i -XGET
+  626  curl http://localhost:8081/api/1.0/label/all/?c={g1:["kigyou_cd:eq:kgyo2"]} -i -XGET
+  627  curl http://localhost:8081/api/1.0/label/all/?c={g1:["kigyou_cd:eq:kgyo2"]} -i -XGET
+  628  curl 'http://localhost:8081/api/1.0/label/all/?c={g1:["kigyou_cd:eq:kgyo2"]}' -i -XGET
+  629  curl "http://localhost:8081/api/1.0/label/all/?c={g1:['kigyou_cd:eq:kgyo2']}" -i -XGET
+  630  curl "http://localhost:8081/api/1.0/label/all/?c={'g1':'['kigyou_cd:eq:kgyo2']'}" -i -XGET
+  631  curl "http://localhost:8081/api/1.0/label/all/?c={'g1':['kigyou_cd:eq:kgyo2']}" -i -XGET
+  632  curl "http://localhost:8081/api/1.0/label/all/?c={'g1':'val'}" -i -XGET
+  633  curl "http://localhost:8081/api/1.0/label/all/?c={'g1': 'val'}" -i -XGET
+  634  curl "http://localhost:8081/api/1.0/label/all/?c={'g1': 'val'}" -i -XGET
+  635  curl "http://localhost:8081/api/1.0/label/all/?c={'g1': 'val'}" -i -XGET
+  636  curl "http://localhost:8081/api/1.0/label/all/?c={'g1':'val'}" -i -XGET
+  637  curl "http://localhost:8081/api/1.0/label/all/?c={'g1': 'val'}" -i -XGET
+  638  curl "http://localhost:8081/api/1.0/label/all/?c={'g1': 'val'}" -i -XGET
+  639  curl "http://localhost:8081/api/1.0/label/all/?c={'g1':'val'}" -i -XGET
+  640  curl "http://localhost:8081/api/1.0/label/all/?c={'g1':'val'}" -i -XGET
+  641  curl "http://localhost:8081/api/1.0/label/all/?c={'g1':val}" -i -XGET
+  642  curl "http://localhost:8081/api/1.0/label/all/?c={g1:val}" -i -XGET
+  643  curl "http://localhost:8081/api/1.0/label/all/?c={g1:val}" -i -XGET
+  644  curl 'http://localhost:8081/api/1.0/label/all/?c={"g1":["kigyou_cd:eq:kgyo2","attibute_id:eq:car","label_id:eq:2"]}' -i -XGET
+  645  curl 'http://localhost:8081/api/1.0/label/all/?c={\"g1\":[\"kigyou_cd:eq:kgyo2\",\"attibute_id:eq:car\",\"label_id:eq:2\"]}' -i -XGET
+  646  curl http://localhost:8081/api/1.0/label/all/?c={\"g1\":[\"kigyou_cd:eq:kgyo2\",\"attibute_id:eq:car\",\"label_id:eq:2\"]} -i -XGET
+  647  curl http://localhost:8081/api/1.0/label/all/?c={\'g1\':[\'kigyou_cd:eq:kgyo2\',\'attibute_id:eq:car\',\'label_id:eq:2\']} -i -XGET
+  648  curl http://localhost:8081/api/1.0/label/all/?c={g1:[\'kigyou_cd:eq:kgyo2\',\'attibute_id:eq:car\',\'label_id:eq:2\']} -i -XGET
+  649  curl http://localhost:8081/api/1.0/label/all/?c={g1:[kigyou_cd:eq:kgyo2,attibute_id:eq:car,label_id:eq:2]} -i -XGET
+  650  curl "http://localhost:8081/api/1.0/label/all/?c={g1:[kigyou_cd:eq:kgyo2,attibute_id:eq:car,label_id:eq:2]}" -i -XGET
+  651  curl 'http://localhost:8081/api/1.0/label/all/?c={g1:[kigyou_cd:eq:kgyo2,attibute_id:eq:car,label_id:eq:2]}' -i -XGET
+  652  curl http://localhost:8081/api/1.0/label/all/?c={g1:[kigyou_cd:eq:kgyo2,attibute_id:eq:car,label_id:eq:2]} -i -XGET
+  653  ll
+  654  history >> history20170221.txt
