@@ -94,6 +94,10 @@ public class LabelRestController {
 	// curl http://localhost:8081/api/1.0/label/all/?c={g1:[kigyou_cd:eq:kgyo2,attibute_id:eq:car,label_id:eq:2]} -i -XGET
 	// curl http://localhost:8081/api/1.0/label/all/?c={kigyou_cd:kgyo2,attibute_id:car,label_id:2]} -i -XGET
 	// curl -g http://localhost:8081/api/1.0/label/all/?c={kigyou_cd:kgyo2,attibute_id:car,label_id:2]} -i -XGET
+	// curl -g -i -XGET http://localhost:8081/api/1.0/label/all/?c={g1:[kigyou_cd:eq:kgyo2,attibute_id:eq:car,label_id:eq:2]}
+	// curl -g -i -XGET http://localhost:8081/api/1.0/label/all/?c=hoge,fuga
+	// curl -g -i -XGET http://localhost:8081/api/1.0/label/all/?c=%7Bg1:[kigyou_cd:eq:kgyo2%2Eattibute_id:eq:car%2Elabel_id:eq:2]%7D
+	// {g1:[kigyou_cd:eq:kgyo2.attibute_id:eq:car.label_id:eq:2]}
 
 	// 実験的なコード
 	@Data
@@ -119,7 +123,10 @@ public class LabelRestController {
 		ObjectMapper mapper = new ObjectMapper();
 
 //		// JSON文字列からJavaBeansオブジェクトへ変換
-//		System.out.println(c);
+		// {g1:[kigyou_cd:eq:kgyo2.attibute_id:eq:car.label_id:eq:2]}
+		System.out.println(c);
+		parseJson(c);
+
 //		// 以下でエラーとなる。
 //		QParamTmp bean = mapper.readValue(c, QParamTmp.class);
 //		String g1 = bean.getG1();
@@ -135,7 +142,19 @@ public class LabelRestController {
         return label;
     }
 
-    // 新規登録
+    private void parseJson(String c) {
+		// TODO 自動生成されたメソッド・スタブ
+    	// {g1:[kigyou_cd:eq:kgyo2.attibute_id:eq:car.label_id:eq:2]}
+    	String tmp = "";
+    	if(!c.isEmpty()){
+    		tmp = c.substring(1, c.length()-1);
+    		System.out.println(tmp);
+
+    	}
+
+	}
+
+	// 新規登録
 	/*
 curl http://localhost:8081/api/1.0/label/all -i -XPOST -H "Content-Type: application/json" -d "{\"kigyou_cd\":\"kgyo5\",\"attibute_id\":\"kokyaku\",\"label_id\":\"5\",\"color\":\"white\",\"creat_datetime\":\"1482565802817\",\"creat_user_id\":\"user001\",\"delete_id\":\"0\",\"label_name\":\"osaka\",\"parent_label_id\":\"0\",\"server_assemb_id\":\"serverassembid\",\"ui_assemb_id\":\"uiassembid\",\"update_datetime\":\"1482565802817\",\"update_user_id\":\"user001\"}"
 	 */
