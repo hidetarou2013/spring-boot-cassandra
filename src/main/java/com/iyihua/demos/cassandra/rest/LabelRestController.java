@@ -96,8 +96,8 @@ public class LabelRestController {
 	// curl -g http://localhost:8081/api/1.0/label/all/?c={kigyou_cd:kgyo2,attibute_id:car,label_id:2]} -i -XGET
 	// curl -g -i -XGET http://localhost:8081/api/1.0/label/all/?c={g1:[kigyou_cd:eq:kgyo2,attibute_id:eq:car,label_id:eq:2]}
 	// curl -g -i -XGET http://localhost:8081/api/1.0/label/all/?c=hoge,fuga
-	// curl -g -i -XGET http://localhost:8081/api/1.0/label/all/?c=%7Bg1:[kigyou_cd:eq:kgyo2%2Eattibute_id:eq:car%2Elabel_id:eq:2]%7D
-	// {g1:[kigyou_cd:eq:kgyo2.attibute_id:eq:car.label_id:eq:2]}
+	// curl -g -i -XGET http://localhost:8081/api/1.0/label/all/?c=%7Bg1:[kigyou_cd:eq:kgyo2,attibute_id:eq:car,label_id:eq:2]%7D
+	// {g1:[kigyou_cd:eq:kgyo2,attibute_id:eq:car,label_id:eq:2]}
 
 	// 実験的なコード
 	@Data
@@ -126,18 +126,22 @@ public class LabelRestController {
 		// {g1:[kigyou_cd:eq:kgyo2.attibute_id:eq:car.label_id:eq:2]}
 		System.out.println(c);
 		parseJson(c);
+		QParamOfLabel obj = new QParamOfLabel();
+		obj.init(1, c);
+		Label bean = obj.getMap_q_param_label().get("g1");
 
 //		// 以下でエラーとなる。
 //		QParamTmp bean = mapper.readValue(c, QParamTmp.class);
 //		String g1 = bean.getG1();
 //		System.out.println(g1);
 
-		Label bean = mapper.readValue(c, Label.class);
+//		Label bean = mapper.readValue(c, Label.class);
 		kigyoCD = bean.getKigyouCd();
 		attibuteId = bean.getAttibuteId();
 		labelId = bean.getLabelId();
 
 		System.out.println(kigyoCD + "/" + attibuteId + "/" + labelId);
+		// 現在の設計では３つの主キーを渡して一意となる
     	Label label = service.findOne(kigyoCD, attibuteId, labelId);
         return label;
     }
