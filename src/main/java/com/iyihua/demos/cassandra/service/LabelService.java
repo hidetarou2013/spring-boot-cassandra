@@ -38,18 +38,26 @@ public class LabelService {
 		return repository.findByKeys(kigyoCD,attibuteId,labelI);
 	}
 
-	public Label create(Label Label) {
+	public Label create(Label label) {
 		// TODO 自動生成されたメソッド・スタブ
-		return repository.save(Label);
+		return repository.save(label);
 	}
 
-	public Label update(Label Label) {
+	public Label update(Label label) {
 		// TODO 自動生成されたメソッド・スタブ
-		return repository.save(Label);
+		return repository.save(label);
 	}
 
 	public void delete(String kigyou_cd,String attibute_id,int s) {
 		// TODO 自動生成されたメソッド・スタブ
+		repository.deleteByLabelId(kigyou_cd,attibute_id,s);
+	}
+
+	public void delete(Label label) {
+		// TODO 自動生成されたメソッド・スタブ
+		String kigyou_cd = label.getKigyouCd();
+		String attibute_id = label.getAttibuteId();
+		int s = label.getLabelId();
 		repository.deleteByLabelId(kigyou_cd,attibute_id,s);
 	}
 

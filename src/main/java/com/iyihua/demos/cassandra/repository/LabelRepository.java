@@ -39,4 +39,6 @@ public interface LabelRepository extends CassandraRepository<Label> {
 	public List<Label> deleteByLabelId(String kigyou_cd,String attibute_id,int s);
 
 
+
+
 }

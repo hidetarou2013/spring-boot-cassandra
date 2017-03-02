@@ -173,6 +173,7 @@ public class LabelRestController {
 	/*
 curl http://localhost:8081/api/1.0/label/all -i -XPOST -H "Content-Type: application/json" -d "{\"kigyou_cd\":\"kgyo5\",\"attibute_id\":\"kokyaku\",\"label_id\":\"5\",\"color\":\"white\",\"creat_datetime\":\"1482565802817\",\"creat_user_id\":\"user001\",\"delete_id\":\"0\",\"label_name\":\"osaka\",\"parent_label_id\":\"0\",\"server_assemb_id\":\"serverassembid\",\"ui_assemb_id\":\"uiassembid\",\"update_datetime\":\"1482565802817\",\"update_user_id\":\"user001\"}"
 curl http://localhost:8081/api/1.0/label/all -i -XPOST -H "Content-Type: application/json" -d "{\"kigyouCd\":\"kgyo5\",\"attibuteId\":\"kokyaku\",\"labelId\":\"5\",\"color\":\"white\",\"creatDatetime\":\"1482565802817\",\"creatUserId\":\"user001\",\"deleteId\":\"0\",\"labelName\":\"osaka\",\"parentLabelId\":\"0\",\"serverAssembId\":\"serverassembid\",\"uiAssembId\":\"uiassembid\",\"updateDatetime\":\"1482565802817\",\"updateUserId\":\"user001\"}"
+curl http://localhost:8081/api/1.0/label/all -i -XPOST -H "Content-Type: application/json" -d "{\"kigyouCd\":\"kgyo6\",\"attibuteId\":\"kokyaku\",\"labelId\":\"6\",\"color\":\"white\",\"creatDatetime\":\"1482565802817\",\"creatUserId\":\"user001\",\"deleteId\":\"0\",\"labelName\":\"osaka\",\"parentLabelId\":\"0\",\"serverAssembId\":\"serverassembid\",\"uiAssembId\":\"uiassembid\",\"updateDatetime\":\"1482565802817\",\"updateUserId\":\"user001\"}"
 
 	 */
 	// OK
@@ -266,6 +267,23 @@ curl http://localhost:8081/api/1.0/label/all/edit/5 -i -XPUT -H "Content-Type: a
     	String attibuteId = pathvals[1];
     	int labelId = Integer.parseInt(pathvals[2]);
     	service.delete(kigyoCD, attibuteId, labelId);
+    }
+
+    /**
+     * 複数削除
+     *
+     * curl http://localhost:8081/api/1.0/label/all -i -XDELETE -H "Content-Type: application/json" -d "[{\"kigyouCd\":\"kgyo5\",\"attibuteId\":\"kokyaku\",\"labelId\":\"5\",\"color\":\"white\",\"creatDatetime\":\"1482565802817\",\"creatUserId\":\"user001\",\"deleteId\":\"0\",\"labelName\":\"osaka\",\"parentLabelId\":\"0\",\"serverAssembId\":\"serverassembid\",\"uiAssembId\":\"uiassembid\",\"updateDatetime\":\"1482565802817\",\"updateUserId\":\"user001\"},{\"kigyouCd\":\"kgyo6\",\"attibuteId\":\"kokyaku\",\"labelId\":\"6\",\"color\":\"white\",\"creatDatetime\":\"1482565802817\",\"creatUserId\":\"user001\",\"deleteId\":\"0\",\"labelName\":\"osaka\",\"parentLabelId\":\"0\",\"serverAssembId\":\"serverassembid\",\"uiAssembId\":\"uiassembid\",\"updateDatetime\":\"1482565802817\",\"updateUserId\":\"user001\"}]"
+     *
+     * refs #1 複数削除機能追加
+     *
+     * @param labels
+     */
+    @DeleteMapping(path = "",consumes=MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    void deleteLabelList(@RequestBody List<Label> labels) {
+    	System.out.println("putLabelList");
+    	labels.forEach(label -> service.delete(label) );
+//    	service.update(labels);
     }
 
 }
