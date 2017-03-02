@@ -8,6 +8,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -108,10 +109,12 @@ public class LabelRestController {
 //		private String g2 = "";
 	}
 
+
 	// 実験的なコード
 	@GetMapping(path = "/")
     Label findOne2(
     		@RequestParam("c") String c
+//    		,@RequestParam("f") String f
     		) throws JsonParseException, JsonMappingException, IOException {
 		//debug
 		System.out.println("findOne2");
@@ -124,25 +127,33 @@ public class LabelRestController {
 
 //		// JSON文字列からJavaBeansオブジェクトへ変換
 		// {g1:[kigyou_cd:eq:kgyo2.attibute_id:eq:car.label_id:eq:2]}
-		System.out.println(c);
-		parseJson(c);
-		QParamOfLabel obj = new QParamOfLabel();
-		obj.init(1, c);
-		Label bean = obj.getMap_q_param_label().get("g1");
+		Label label = null;
+		if(!c.isEmpty()){
+			System.out.println(c);
+//			parseJson(c);
+			QParamOfLabel obj = new QParamOfLabel();
+			obj.init(1, c);
+			Label bean = obj.getMap_q_param_label().get("g1");
 
-//		// 以下でエラーとなる。
-//		QParamTmp bean = mapper.readValue(c, QParamTmp.class);
-//		String g1 = bean.getG1();
-//		System.out.println(g1);
+//			// 以下でエラーとなる。
+//			QParamTmp bean = mapper.readValue(c, QParamTmp.class);
+//			String g1 = bean.getG1();
+//			System.out.println(g1);
 
-//		Label bean = mapper.readValue(c, Label.class);
-		kigyoCD = bean.getKigyouCd();
-		attibuteId = bean.getAttibuteId();
-		labelId = bean.getLabelId();
+//			Label bean = mapper.readValue(c, Label.class);
+			kigyoCD = bean.getKigyouCd();
+			attibuteId = bean.getAttibuteId();
+			labelId = bean.getLabelId();
 
-		System.out.println(kigyoCD + "/" + attibuteId + "/" + labelId);
-		// 現在の設計では３つの主キーを渡して一意となる
-    	Label label = service.findOne(kigyoCD, attibuteId, labelId);
+			System.out.println(kigyoCD + "/" + attibuteId + "/" + labelId);
+			// 現在の設計では３つの主キーを渡して一意となる
+	    	label = service.findOne(kigyoCD, attibuteId, labelId);
+		}
+//		if(!f.isEmpty()){
+//			System.out.println(f);
+//		}
+
+
         return label;
     }
 
@@ -161,6 +172,8 @@ public class LabelRestController {
 	// 新規登録
 	/*
 curl http://localhost:8081/api/1.0/label/all -i -XPOST -H "Content-Type: application/json" -d "{\"kigyou_cd\":\"kgyo5\",\"attibute_id\":\"kokyaku\",\"label_id\":\"5\",\"color\":\"white\",\"creat_datetime\":\"1482565802817\",\"creat_user_id\":\"user001\",\"delete_id\":\"0\",\"label_name\":\"osaka\",\"parent_label_id\":\"0\",\"server_assemb_id\":\"serverassembid\",\"ui_assemb_id\":\"uiassembid\",\"update_datetime\":\"1482565802817\",\"update_user_id\":\"user001\"}"
+curl http://localhost:8081/api/1.0/label/all -i -XPOST -H "Content-Type: application/json" -d "{\"kigyouCd\":\"kgyo5\",\"attibuteId\":\"kokyaku\",\"labelId\":\"5\",\"color\":\"white\",\"creatDatetime\":\"1482565802817\",\"creatUserId\":\"user001\",\"deleteId\":\"0\",\"labelName\":\"osaka\",\"parentLabelId\":\"0\",\"serverAssembId\":\"serverassembid\",\"uiAssembId\":\"uiassembid\",\"updateDatetime\":\"1482565802817\",\"updateUserId\":\"user001\"}"
+
 	 */
 	// OK
 	// 初回登録時に成功していたが、２回目にやり直してみて、エラーとなった。
@@ -176,15 +189,55 @@ curl http://localhost:8081/api/1.0/label/all -i -XPOST -H "Content-Type: applica
     // 更新
     /*
 curl http://localhost:8081/api/1.0/label/all/edit/5 -i -XPUT -H "Content-Type: application/json" -d "{\"kigyou_cd\":\"kgyo5\",\"attibute_id\":\"kokyaku\",\"label_id\":\"5\",\"color\":\"red\",\"creat_datetime\":\"1482565802817\",\"creat_user_id\":\"user001\",\"delete_id\":\"0\",\"label_name\":\"osaka\",\"parent_label_id\":\"0\",\"server_assemb_id\":\"serverassembid\",\"ui_assemb_id\":\"uiassembid\",\"update_datetime\":\"1482565802817\",\"update_user_id\":\"user001\"}"
+curl http://localhost:8081/api/1.0/label/all/edit/5 -i -XPUT -H "Content-Type: application/json" -d "{\"kigyouCd\":\"kgyo5\",\"attibuteId\":\"kokyaku\",\"labelId\":\"5\",\"color\":\"red\",\"creatDatetime\":\"1482565802817\",\"creatUserId\":\"user001\",\"deleteId\":\"0\",\"labelName\":\"osaka\",\"parentLabelId\":\"0\",\"serverAssembId\":\"serverassembid\",\"ui_assemb_id\":\"uiAssembId\",\"updateDatetime\":\"1482565802817\",\"updateUserId\":\"user001\"}"
+
      */
     // OK
     // しかし、このURLパターンは共通仕様にはない
     @PutMapping(path = "edit/{labelId}")
-    Label putLabel(@PathVariable int labelId, @RequestBody Label Label) {
-    	System.out.println("putLabel");
+    Label putLabel_old(@PathVariable int labelId, @RequestBody Label Label) {
+    	System.out.println("putLabel_old");
     	Label.setLabelId(labelId);
         return service.update(Label);
     }
+
+    /**
+     * 更新
+     * curl http://localhost:8081/api/1.0/label/all/kgyo5_kokyaku_5 -i -XPUT -H "Content-Type: application/json" -d "{\"kigyouCd\":\"kgyo5\",\"attibuteId\":\"kokyaku\",\"labelId\":\"5\",\"color\":\"red\",\"creatDatetime\":\"1482565802817\",\"creatUserId\":\"user001\",\"deleteId\":\"0\",\"labelName\":\"osaka\",\"parentLabelId\":\"0\",\"serverAssembId\":\"serverassembid\",\"ui_assemb_id\":\"uiAssembId\",\"updateDatetime\":\"1482565802817\",\"updateUserId\":\"user001\"}"
+     *
+     * @param id → KigyouCd_AttibuteId_LabelId
+     * @param label
+     * @return
+     */
+    @PutMapping(path = "/{id}")
+    Label putLabel(@PathVariable String id, @RequestBody Label label) {
+    	System.out.println("putLabel");
+    	String[] pathvals = id.split("_", -1);
+    	label.setKigyouCd(pathvals[0]);
+    	label.setAttibuteId(pathvals[1]);
+    	label.setLabelId(Integer.parseInt(pathvals[2]));
+        return service.update(label);
+    }
+
+    /**
+     * 複数更新
+     *
+     * curl http://localhost:8081/api/1.0/label/all -i -XPUT -H "Content-Type: application/json" -d "[{\"kigyouCd\":\"kgyo1\",\"attibuteId\":\"kokyaku\",\"labelId\":\"1\",\"color\":\"blue3\",\"creatDatetime\":\"1482565802817\",\"creatUserId\":\"user001\",\"deleteId\":\"0\",\"labelName\":\"osaka\",\"parentLabelId\":\"0\",\"serverAssembId\":\"serverassembid\",\"ui_assemb_id\":\"uiAssembId\",\"updateDatetime\":\"1482565802817\",\"updateUserId\":\"user001\"},{\"kigyouCd\":\"kgyo2\",\"attibuteId\":\"car\",\"labelId\":\"2\",\"color\":\"red3\",\"creatDatetime\":\"1482565802817\",\"creatUserId\":\"user001\",\"deleteId\":\"0\",\"labelName\":\"osaka\",\"parentLabelId\":\"0\",\"serverAssembId\":\"serverassembid\",\"ui_assemb_id\":\"uiAssembId\",\"updateDatetime\":\"1482565802817\",\"updateUserId\":\"user001\"}]"
+     *
+     * consumes=MediaType.APPLICATION_JSON_VALUE
+     *
+     * refs #1 複数更新機能追加
+     *
+     * @param id
+     * @param labels
+     */
+    @PutMapping(path = "",consumes=MediaType.APPLICATION_JSON_VALUE)
+    void putLabelList(@RequestBody List<Label> labels) {
+    	System.out.println("putLabelList");
+    	labels.forEach(label -> service.update(label) );
+//    	service.update(labels);
+    }
+
 
     // 削除
     // curl http://localhost:8081/api/1.0/label/all/delete/kgyo5/kokyaku/5 -i -XDELETE
@@ -192,8 +245,26 @@ curl http://localhost:8081/api/1.0/label/all/edit/5 -i -XPUT -H "Content-Type: a
     // しかし、このURLパターンは共通仕様にはない
     @DeleteMapping(path = "delete/{kigyoCD}/{attibuteId}/{labelId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    void deleteLabel(@PathVariable String kigyoCD,@PathVariable String attibuteId,@PathVariable int labelId) {
+    void deleteLabel_old(@PathVariable String kigyoCD,@PathVariable String attibuteId,@PathVariable int labelId) {
+    	System.out.println("deleteLabel_old");
+    	service.delete(kigyoCD, attibuteId, labelId);
+    }
+
+    /**
+     * 削除
+     *
+     * curl http://localhost:8081/api/1.0/label/all/kgyo5_kokyaku_5 -i -XDELETE
+     *
+     * @param id
+     */
+    @DeleteMapping(path = "/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    void deleteLabel(@PathVariable String id) {
     	System.out.println("deleteLabel");
+    	String[] pathvals = id.split("_", -1);
+    	String kigyoCD = pathvals[0];
+    	String attibuteId = pathvals[1];
+    	int labelId = Integer.parseInt(pathvals[2]);
     	service.delete(kigyoCD, attibuteId, labelId);
     }
 
