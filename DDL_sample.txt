@@ -102,3 +102,35 @@ SELECT * FROM memobox where pkey1='a' and pkey2='b' ORDER BY id,name;
 
 
 
+DROP TABLE IF EXISTS sample.MLabel;
+CREATE TABLE IF NOT EXISTS sample.MLabel
+(
+	companyCode text,
+	parentLabelCode text,
+	labelCode text,
+	labelName text,
+	labelDisplayOrder int,
+	level1 int ,
+	level2 int ,
+	level3 int ,
+	level4 int ,
+	level5 int ,
+	analizeFlag int,
+	color text,
+	logicalDeleteDiv int,
+	PRIMARY KEY ((companyCode),parentLabelCode,labelCode,labelDisplayOrder)
+)
+WITH CLUSTERING ORDER BY (parentLabelCode DESC,labelCode DESC,labelDisplayOrder DESC);
+
+CREATE INDEX sample_MLabel_labelName ON sample.MLabel ( labelName );
+
+
+INSERT INTO sample.MLabel (companyCode, labelCode, labelName, color,parentLabelCode,labelDisplayOrder, level1, level2, level3, level4, level5, analizeFlag,logicalDeleteDiv) VALUES ('AABBCC0000000001',  '0001', 'A','#FF0000','0000',  1, 1, 0,0,0,0,0,0);
+INSERT INTO sample.MLabel (companyCode, labelCode, labelName, color,parentLabelCode,labelDisplayOrder, level1, level2, level3, level4, level5, analizeFlag,logicalDeleteDiv) VALUES ('AABBCC0000000001',  '0002', 'A-1','#FF0000','0001',  2, 0, 1,0,0,0,0,0);
+INSERT INTO sample.MLabel (companyCode, labelCode, labelName, color,parentLabelCode,labelDisplayOrder, level1, level2, level3, level4, level5, analizeFlag,logicalDeleteDiv) VALUES ('AABBCC0000000001',  '0003', 'A-2','#FF0000','0001',  3, 0, 2,0,0,0,0,0);
+INSERT INTO sample.MLabel (companyCode, labelCode, labelName, color,parentLabelCode,labelDisplayOrder, level1, level2, level3, level4, level5, analizeFlag,logicalDeleteDiv) VALUES ('AABBCC0000000001',  '0004', 'B','#FF0000','0000',  4, 2, 0,0,0,0,0,0);
+INSERT INTO sample.MLabel (companyCode, labelCode, labelName, color,parentLabelCode,labelDisplayOrder, level1, level2, level3, level4, level5, analizeFlag,logicalDeleteDiv) VALUES ('AABBCC0000000001',  '0005', 'B-1','#FF0000','0004',  5, 0, 1,0,0,0,0,0);
+INSERT INTO sample.MLabel (companyCode, labelCode, labelName, color,parentLabelCode,labelDisplayOrder, level1, level2, level3, level4, level5, analizeFlag,logicalDeleteDiv) VALUES ('AABBCC0000000001',  '0006', 'B-2','#FF0000','0004',  6, 0, 2,0,0,0,0,0);
+INSERT INTO sample.MLabel (companyCode, labelCode, labelName, color,parentLabelCode,labelDisplayOrder, level1, level2, level3, level4, level5, analizeFlag,logicalDeleteDiv) VALUES ('AABBCC0000000001',  '0007', 'B-2-1','#FF0000','0006',  7, 0, 0,1,0,0,0,0);
+INSERT INTO sample.MLabel (companyCode, labelCode, labelName, color,parentLabelCode,labelDisplayOrder, level1, level2, level3, level4, level5, analizeFlag,logicalDeleteDiv) VALUES ('AABBCC0000000001',  '0008', 'C','#FF0000','0000',  8, 3, 0,0,0,0,0,0);
+
