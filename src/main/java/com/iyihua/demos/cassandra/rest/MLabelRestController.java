@@ -30,7 +30,29 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/*
+  513  curl http://localhost:8081/api/V1/mlabel/all -i -XGET
+  514  curl http://localhost:8081/api/V1/mlabel/all/byname/A -i -XGET
+  515  curl http://localhost:8081/api/V1/mlabel/all/byname/A-1 -i -XGET
+  516  curl http://localhost:8081/api/V1/mlabel/all/byname/A-1 -i -XGET
+  517  curl http://localhost:8081/api/V1/mlabel/all/bykeys/AABBCC0000000001/0001/0002/2 -i -XGET
+  519  curl "http://localhost:8081/api/V1/mlabel/all/findOne?companyCode=AABBCC0000000001&parentLabelCode=0000&labelCode=0001&labelDisplayOrder=1" -i -XGET
+  520  curl -g -i -XGET http://localhost:8081/api/V1/mlabel/all/?c=%7Bg1:[companyCode:eq:AABBCC0000000001,parentLabelCode:eq:0000,labelCode:eq:0001,labelDisplayOrder:eq:1]%7D
 
+  POST
+  521  curl http://localhost:8081/api/V1/mlabel/all -i -XPOST -H "Content-Type: application/json" -d "{\"companyCode\":\"AABBCC0000000001\",\"parentLabelCode\":\"0000\",\"labelCode\":\"0009\",\"color\":\"#FFFFFF\",\"labelDisplayOrder\":\"9\",\"labelName\":\"D\",\"level1\":\"4\",\"level2\":\"0\",\"level3\":\"0\",\"level4\":\"0\",\"level5\":\"0\",\"analizeFlag\":\"0\",\"logicalDeleteDiv\":\"0\"}"
+
+  PUT
+  522  curl http://localhost:8081/api/V1/mlabel/all/AABBCC0000000001_0000_0009_9 -i -XPUT -H "Content-Type: application/json" -d "{\"companyCode\":\"AABBCC0000000001\",\"parentLabelCode\":\"0000\",\"labelCode\":\"0009\",\"color\":\"#000000\",\"labelDisplayOrder\":\"9\",\"labelName\":\"D\",\"level1\":\"4\",\"level2\":\"0\",\"level3\":\"0\",\"level4\":\"0\",\"level5\":\"0\",\"analizeFlag\":\"0\",\"logicalDeleteDiv\":\"0\"}"
+
+  DELETE
+  524  curl http://localhost:8081/api/V1/mlabel/all/AABBCC0000000001_0000_0009_9 -i -XDELETE
+
+  GET
+  525  curl http://localhost:8081/api/V1/mlabel/all/AABBCC0000000001_0000_0001_1 -i -XGET
+  526  curl http://localhost:8081/api/V1/mlabel/all/AABBCC0000000001_0000_0004_4 -i -XGET
+  528  curl http://localhost:8081/api/V1/mlabel/all/AABBCC0000000001_0000_0008_8 -i -XGET
+ */
 
 @RestController
 @RequestMapping("api/V1/mlabel/all")
@@ -40,7 +62,7 @@ public class MLabelRestController {
 	MLabelService service;
 
 	// 全件抽出
-	// curl http://localhost:8081/api/V1/label/all -i -XGET
+	// curl http://localhost:8081/api/V1/mlabel/all -i -XGET
 	// OK
 	@GetMapping
 	List<MLabel> getLabels() {
@@ -50,7 +72,7 @@ public class MLabelRestController {
     }
 
 	// ラベル名抽出
-	// curl http://localhost:8081/api/V1/label/all/byname/java -i -XGET
+	// curl http://localhost:8081/api/V1/mlabel/all/byname/java -i -XGET
 	// OK
 	// しかし、このURLパターンは共通仕様にはない
 	@GetMapping("byname/{s}")
@@ -61,11 +83,11 @@ public class MLabelRestController {
     }
 
 	// １件抽出
-	// curl http://localhost:8081/api/V1/label/all/bykeys/kgyo2/car/2 -i -XGET
+	// curl http://localhost:8081/api/V1/mlabel/all/bykeys/kgyo2/car/2 -i -XGET
 	// OK
 	// 複合主キーのさばき方の例として、複数のPKを@PathVariableで料理するやりかた
 	// しかし、このURLパターンは共通仕様にはない
-	@GetMapping(path = "bykeys/{kigyoCD}/{attibuteId}/{labelI}")
+	@GetMapping(path = "bykeys/{companyCode}/{parentLabelCode}/{labelCode}/{labelDisplayOrder}")
 	MLabel findByKeys(@PathVariable String companyCode,@PathVariable String parentLabelCode,@PathVariable String labelCode,@PathVariable int labelDisplayOrder) {
 		System.out.println("findByKeys");
 		MLabel obj = service.findByKeys(companyCode,parentLabelCode,labelCode,labelDisplayOrder);
@@ -73,31 +95,54 @@ public class MLabelRestController {
     }
 
 	// １件抽出
-	// curl "http://localhost:8081/api/V1/label/all/findOne?kigyou_cd=kgyo2&attibute_id=car&label_id=2" -i -XGET
+	// curl "http://localhost:8081/api/V1/mlabel/all/findOne?companyCode=AABBCC0000000001&parentLabelCode=0000&labelCode=0001&labelDisplayOrder=1" -i -XGET
 	// OK
 	// しかし、このURLパターンは共通仕様にはない
 	@GetMapping(path = "/findOne")
-	MLabel findOne(
+	MLabel findOne_old(
     		@RequestParam("companyCode") String companyCode
 			,@RequestParam("parentLabelCode") String parentLabelCode
 			,@RequestParam("labelCode") String labelCode
 			,@RequestParam("labelDisplayOrder") int labelDisplayOrder
     		) {
 		//debug
-		System.out.println("findOne");
+		System.out.println("findOne_old");
 		System.out.println(companyCode + "/" + parentLabelCode + "/" + labelCode + "/" + labelDisplayOrder);
 		MLabel label = service.findOne(companyCode,parentLabelCode,labelCode,labelDisplayOrder);
         return label;
     }
 
-	// curl 'http://localhost:8081/api/V1/label/all/?c={"g1":["kigyou_cd:eq:kgyo2","attibute_id:eq:car","label_id:eq:2"]}' -i -XGET
-	// curl http://localhost:8081/api/V1/label/all/?c={g1:[kigyou_cd:eq:kgyo2,attibute_id:eq:car,label_id:eq:2]} -i -XGET
-	// curl http://localhost:8081/api/V1/label/all/?c={kigyou_cd:kgyo2,attibute_id:car,label_id:2]} -i -XGET
-	// curl -g http://localhost:8081/api/V1/label/all/?c={kigyou_cd:kgyo2,attibute_id:car,label_id:2]} -i -XGET
-	// curl -g -i -XGET http://localhost:8081/api/V1/label/all/?c={g1:[kigyou_cd:eq:kgyo2,attibute_id:eq:car,label_id:eq:2]}
-	// curl -g -i -XGET http://localhost:8081/api/V1/label/all/?c=hoge,fuga
-	// curl -g -i -XGET http://localhost:8081/api/V1/label/all/?c=%7Bg1:[kigyou_cd:eq:kgyo2,attibute_id:eq:car,label_id:eq:2]%7D
-	// {g1:[kigyou_cd:eq:kgyo2,attibute_id:eq:car,label_id:eq:2]}
+	/**
+	 * 主キー抽出
+	 * curl http://localhost:8081/api/V1/mlabel/all/AABBCC0000000001_0000_0001_1 -i -XGET
+	 *
+	 * @param id
+	 * @return
+	 */
+	@GetMapping(path = "/{id}")
+	MLabel findOne(
+			@PathVariable String id
+    		) {
+		//debug
+		System.out.println("findOne");
+    	String[] pathvals = id.split("_", -1);
+    	String companyCode = pathvals[0];
+    	String parentLabelCode = pathvals[1];
+    	String labelCode = pathvals[2];
+    	int labelDisplayOrder = Integer.parseInt(pathvals[3]);
+		System.out.println(companyCode + "/" + parentLabelCode + "/" + labelCode + "/" + labelDisplayOrder);
+		MLabel label = service.findOne(companyCode,parentLabelCode,labelCode,labelDisplayOrder);
+        return label;
+    }
+
+	// curl 'http://localhost:8081/api/V1/mlabel/all/?c={"g1":["kigyou_cd:eq:kgyo2","attibute_id:eq:car","label_id:eq:2"]}' -i -XGET
+	// curl http://localhost:8081/api/V1/mlabel/all/?c={g1:[kigyou_cd:eq:kgyo2,attibute_id:eq:car,label_id:eq:2]} -i -XGET
+	// curl http://localhost:8081/api/V1/mlabel/all/?c={kigyou_cd:kgyo2,attibute_id:car,label_id:2]} -i -XGET
+	// curl -g http://localhost:8081/api/V1/mlabel/all/?c={kigyou_cd:kgyo2,attibute_id:car,label_id:2]} -i -XGET
+	// curl -g -i -XGET http://localhost:8081/api/V1/mlabel/all/?c={g1:[kigyou_cd:eq:kgyo2,attibute_id:eq:car,label_id:eq:2]}
+	// curl -g -i -XGET http://localhost:8081/api/V1/mlabel/all/?c=hoge,fuga
+	// curl -g -i -XGET http://localhost:8081/api/V1/mlabel/all/?c=%7Bg1:[companyCode:eq:AABBCC0000000001,parentLabelCode:eq:0000,labelCode:eq:0001,labelDisplayOrder:eq:1]%7D
+	// {g1:[companyCode:eq:AABBCC0000000001,parentLabelCode:eq:0000,labelCode:eq:0001,labelDisplayOrder:eq:1]}
 
 	// 実験的なコード
 	@Data
@@ -158,9 +203,10 @@ public class MLabelRestController {
 
 	// 新規登録
 	/*
-curl http://localhost:8081/api/V1/label/all -i -XPOST -H "Content-Type: application/json" -d "{\"kigyou_cd\":\"kgyo5\",\"attibute_id\":\"kokyaku\",\"label_id\":\"5\",\"color\":\"white\",\"creat_datetime\":\"1482565802817\",\"creat_user_id\":\"user001\",\"delete_id\":\"0\",\"label_name\":\"osaka\",\"parent_label_id\":\"0\",\"server_assemb_id\":\"serverassembid\",\"ui_assemb_id\":\"uiassembid\",\"update_datetime\":\"1482565802817\",\"update_user_id\":\"user001\"}"
-curl http://localhost:8081/api/V1/label/all -i -XPOST -H "Content-Type: application/json" -d "{\"kigyouCd\":\"kgyo5\",\"attibuteId\":\"kokyaku\",\"labelId\":\"5\",\"color\":\"white\",\"creatDatetime\":\"1482565802817\",\"creatUserId\":\"user001\",\"deleteId\":\"0\",\"labelName\":\"osaka\",\"parentLabelId\":\"0\",\"serverAssembId\":\"serverassembid\",\"uiAssembId\":\"uiassembid\",\"updateDatetime\":\"1482565802817\",\"updateUserId\":\"user001\"}"
-curl http://localhost:8081/api/V1/label/all -i -XPOST -H "Content-Type: application/json" -d "{\"kigyouCd\":\"kgyo6\",\"attibuteId\":\"kokyaku\",\"labelId\":\"6\",\"color\":\"white\",\"creatDatetime\":\"1482565802817\",\"creatUserId\":\"user001\",\"deleteId\":\"0\",\"labelName\":\"osaka\",\"parentLabelId\":\"0\",\"serverAssembId\":\"serverassembid\",\"uiAssembId\":\"uiassembid\",\"updateDatetime\":\"1482565802817\",\"updateUserId\":\"user001\"}"
+curl http://localhost:8081/api/V1/mlabel/all -i -XPOST -H "Content-Type: application/json" -d "{\"kigyou_cd\":\"kgyo5\",\"attibute_id\":\"kokyaku\",\"label_id\":\"5\",\"color\":\"white\",\"creat_datetime\":\"1482565802817\",\"creat_user_id\":\"user001\",\"delete_id\":\"0\",\"label_name\":\"osaka\",\"parent_label_id\":\"0\",\"server_assemb_id\":\"serverassembid\",\"ui_assemb_id\":\"uiassembid\",\"update_datetime\":\"1482565802817\",\"update_user_id\":\"user001\"}"
+curl http://localhost:8081/api/V1/mlabel/all -i -XPOST -H "Content-Type: application/json" -d "{\"kigyouCd\":\"kgyo5\",\"attibuteId\":\"kokyaku\",\"labelId\":\"5\",\"color\":\"white\",\"creatDatetime\":\"1482565802817\",\"creatUserId\":\"user001\",\"deleteId\":\"0\",\"labelName\":\"osaka\",\"parentLabelId\":\"0\",\"serverAssembId\":\"serverassembid\",\"uiAssembId\":\"uiassembid\",\"updateDatetime\":\"1482565802817\",\"updateUserId\":\"user001\"}"
+curl http://localhost:8081/api/V1/mlabel/all -i -XPOST -H "Content-Type: application/json" -d "{\"kigyouCd\":\"kgyo6\",\"attibuteId\":\"kokyaku\",\"labelId\":\"6\",\"color\":\"white\",\"creatDatetime\":\"1482565802817\",\"creatUserId\":\"user001\",\"deleteId\":\"0\",\"labelName\":\"osaka\",\"parentLabelId\":\"0\",\"serverAssembId\":\"serverassembid\",\"uiAssembId\":\"uiassembid\",\"updateDatetime\":\"1482565802817\",\"updateUserId\":\"user001\"}"
+curl http://localhost:8081/api/V1/mlabel/all -i -XPOST -H "Content-Type: application/json" -d "{\"companyCode\":\"AABBCC0000000001\",\"parentLabelCode\":\"0000\",\"labelCode\":\"0009\",\"color\":\"#FFFFFF\",\"labelDisplayOrder\":\"9\",\"labelName\":\"D\",\"level1\":\"4\",\"level2\":\"0\",\"level3\":\"0\",\"level4\":\"0\",\"level5\":\"0\",\"analizeFlag\":\"0\",\"logicalDeleteDiv\":\"0\"}"
 
 	 */
 	// OK
@@ -168,16 +214,16 @@ curl http://localhost:8081/api/V1/label/all -i -XPOST -H "Content-Type: applicat
     ResponseEntity<MLabel> postLabel(@RequestBody MLabel Label, UriComponentsBuilder uriBuilder) {
     	System.out.println("postLabel");
     	MLabel created = service.create(Label);
-        URI location = uriBuilder.path("api/V1/label/all/{id}")
+        URI location = uriBuilder.path("api/V1/mlabel/all/{id}")
                 .buildAndExpand(created.getLabelCode()).toUri();
         return ResponseEntity.created(location).body(created);
     }
 
     // 更新
     /*
-curl http://localhost:8081/api/V1/label/all/edit/5 -i -XPUT -H "Content-Type: application/json" -d "{\"kigyou_cd\":\"kgyo5\",\"attibute_id\":\"kokyaku\",\"label_id\":\"5\",\"color\":\"red\",\"creat_datetime\":\"1482565802817\",\"creat_user_id\":\"user001\",\"delete_id\":\"0\",\"label_name\":\"osaka\",\"parent_label_id\":\"0\",\"server_assemb_id\":\"serverassembid\",\"ui_assemb_id\":\"uiassembid\",\"update_datetime\":\"1482565802817\",\"update_user_id\":\"user001\"}"
-curl http://localhost:8081/api/V1/label/all/edit/5 -i -XPUT -H "Content-Type: application/json" -d "{\"kigyouCd\":\"kgyo5\",\"attibuteId\":\"kokyaku\",\"labelId\":\"5\",\"color\":\"red\",\"creatDatetime\":\"1482565802817\",\"creatUserId\":\"user001\",\"deleteId\":\"0\",\"labelName\":\"osaka\",\"parentLabelId\":\"0\",\"serverAssembId\":\"serverassembid\",\"ui_assemb_id\":\"uiAssembId\",\"updateDatetime\":\"1482565802817\",\"updateUserId\":\"user001\"}"
-
+curl http://localhost:8081/api/V1/mlabel/all/edit/5 -i -XPUT -H "Content-Type: application/json" -d "{\"kigyou_cd\":\"kgyo5\",\"attibute_id\":\"kokyaku\",\"label_id\":\"5\",\"color\":\"red\",\"creat_datetime\":\"1482565802817\",\"creat_user_id\":\"user001\",\"delete_id\":\"0\",\"label_name\":\"osaka\",\"parent_label_id\":\"0\",\"server_assemb_id\":\"serverassembid\",\"ui_assemb_id\":\"uiassembid\",\"update_datetime\":\"1482565802817\",\"update_user_id\":\"user001\"}"
+curl http://localhost:8081/api/V1/mlabel/all/edit/5 -i -XPUT -H "Content-Type: application/json" -d "{\"kigyouCd\":\"kgyo5\",\"attibuteId\":\"kokyaku\",\"labelId\":\"5\",\"color\":\"red\",\"creatDatetime\":\"1482565802817\",\"creatUserId\":\"user001\",\"deleteId\":\"0\",\"labelName\":\"osaka\",\"parentLabelId\":\"0\",\"serverAssembId\":\"serverassembid\",\"ui_assemb_id\":\"uiAssembId\",\"updateDatetime\":\"1482565802817\",\"updateUserId\":\"user001\"}"
+curl http://localhost:8081/api/V1/mlabel/all/edit/0009 -i -XPUT -H "Content-Type: application/json" -d "{\"companyCode\":\"AABBCC0000000001\",\"parentLabelCode\":\"0000\",\"labelCode\":\"0009\",\"color\":\"#000000\",\"labelDisplayOrder\":\"9\",\"labelName\":\"D\",\"level1\":\"4\",\"level2\":\"0\",\"level3\":\"0\",\"level4\":\"0\",\"level5\":\"0\",\"analizeFlag\":\"0\",\"logicalDeleteDiv\":\"0\"}"
      */
     // OK
     // しかし、このURLパターンは共通仕様にはない
@@ -190,7 +236,7 @@ curl http://localhost:8081/api/V1/label/all/edit/5 -i -XPUT -H "Content-Type: ap
 
     /**
      * 更新
-     * curl http://localhost:8081/api/V1/label/all/kgyo5_kokyaku_5 -i -XPUT -H "Content-Type: application/json" -d "{\"kigyouCd\":\"kgyo5\",\"attibuteId\":\"kokyaku\",\"labelId\":\"5\",\"color\":\"red\",\"creatDatetime\":\"1482565802817\",\"creatUserId\":\"user001\",\"deleteId\":\"0\",\"labelName\":\"osaka\",\"parentLabelId\":\"0\",\"serverAssembId\":\"serverassembid\",\"ui_assemb_id\":\"uiAssembId\",\"updateDatetime\":\"1482565802817\",\"updateUserId\":\"user001\"}"
+     * curl http://localhost:8081/api/V1/mlabel/all/AABBCC0000000001_0000_0009_9 -i -XPUT -H "Content-Type: application/json" -d "{\"companyCode\":\"AABBCC0000000001\",\"parentLabelCode\":\"0000\",\"labelCode\":\"0009\",\"color\":\"#000000\",\"labelDisplayOrder\":\"9\",\"labelName\":\"D\",\"level1\":\"4\",\"level2\":\"0\",\"level3\":\"0\",\"level4\":\"0\",\"level5\":\"0\",\"analizeFlag\":\"0\",\"logicalDeleteDiv\":\"0\"}"
      *
      * @param id → KigyouCd_AttibuteId_LabelId
      * @param label
@@ -210,7 +256,7 @@ curl http://localhost:8081/api/V1/label/all/edit/5 -i -XPUT -H "Content-Type: ap
     /**
      * 複数更新
      *
-     * curl http://localhost:8081/api/V1/label/all -i -XPUT -H "Content-Type: application/json" -d "[{\"kigyouCd\":\"kgyo1\",\"attibuteId\":\"kokyaku\",\"labelId\":\"1\",\"color\":\"blue3\",\"creatDatetime\":\"1482565802817\",\"creatUserId\":\"user001\",\"deleteId\":\"0\",\"labelName\":\"osaka\",\"parentLabelId\":\"0\",\"serverAssembId\":\"serverassembid\",\"ui_assemb_id\":\"uiAssembId\",\"updateDatetime\":\"1482565802817\",\"updateUserId\":\"user001\"},{\"kigyouCd\":\"kgyo2\",\"attibuteId\":\"car\",\"labelId\":\"2\",\"color\":\"red3\",\"creatDatetime\":\"1482565802817\",\"creatUserId\":\"user001\",\"deleteId\":\"0\",\"labelName\":\"osaka\",\"parentLabelId\":\"0\",\"serverAssembId\":\"serverassembid\",\"ui_assemb_id\":\"uiAssembId\",\"updateDatetime\":\"1482565802817\",\"updateUserId\":\"user001\"}]"
+     * curl http://localhost:8081/api/V1/mlabel/all -i -XPUT -H "Content-Type: application/json" -d "[{\"kigyouCd\":\"kgyo1\",\"attibuteId\":\"kokyaku\",\"labelId\":\"1\",\"color\":\"blue3\",\"creatDatetime\":\"1482565802817\",\"creatUserId\":\"user001\",\"deleteId\":\"0\",\"labelName\":\"osaka\",\"parentLabelId\":\"0\",\"serverAssembId\":\"serverassembid\",\"ui_assemb_id\":\"uiAssembId\",\"updateDatetime\":\"1482565802817\",\"updateUserId\":\"user001\"},{\"kigyouCd\":\"kgyo2\",\"attibuteId\":\"car\",\"labelId\":\"2\",\"color\":\"red3\",\"creatDatetime\":\"1482565802817\",\"creatUserId\":\"user001\",\"deleteId\":\"0\",\"labelName\":\"osaka\",\"parentLabelId\":\"0\",\"serverAssembId\":\"serverassembid\",\"ui_assemb_id\":\"uiAssembId\",\"updateDatetime\":\"1482565802817\",\"updateUserId\":\"user001\"}]"
      *
      * consumes=MediaType.APPLICATION_JSON_VALUE
      *
@@ -227,7 +273,7 @@ curl http://localhost:8081/api/V1/label/all/edit/5 -i -XPUT -H "Content-Type: ap
 
 
     // 削除
-    // curl http://localhost:8081/api/V1/label/all/delete/kgyo5/kokyaku/5 -i -XDELETE
+    // curl http://localhost:8081/api/V1/mlabel/all/delete/kgyo5/kokyaku/5 -i -XDELETE
     // OK
     // しかし、このURLパターンは共通仕様にはない
     @DeleteMapping(path = "delete/{companyCode}/{parentLabelCode}/{labelCode}/{labelDisplayOrder}")
@@ -240,7 +286,7 @@ curl http://localhost:8081/api/V1/label/all/edit/5 -i -XPUT -H "Content-Type: ap
     /**
      * 削除
      *
-     * curl http://localhost:8081/api/V1/label/all/kgyo5_kokyaku_5 -i -XDELETE
+     * curl http://localhost:8081/api/V1/mlabel/all/AABBCC0000000001_0000_0009_9 -i -XDELETE
      *
      * @param id
      */
@@ -259,7 +305,7 @@ curl http://localhost:8081/api/V1/label/all/edit/5 -i -XPUT -H "Content-Type: ap
     /**
      * 複数削除
      *
-     * curl http://localhost:8081/api/V1/label/all -i -XDELETE -H "Content-Type: application/json" -d "[{\"kigyouCd\":\"kgyo5\",\"attibuteId\":\"kokyaku\",\"labelId\":\"5\",\"color\":\"white\",\"creatDatetime\":\"1482565802817\",\"creatUserId\":\"user001\",\"deleteId\":\"0\",\"labelName\":\"osaka\",\"parentLabelId\":\"0\",\"serverAssembId\":\"serverassembid\",\"uiAssembId\":\"uiassembid\",\"updateDatetime\":\"1482565802817\",\"updateUserId\":\"user001\"},{\"kigyouCd\":\"kgyo6\",\"attibuteId\":\"kokyaku\",\"labelId\":\"6\",\"color\":\"white\",\"creatDatetime\":\"1482565802817\",\"creatUserId\":\"user001\",\"deleteId\":\"0\",\"labelName\":\"osaka\",\"parentLabelId\":\"0\",\"serverAssembId\":\"serverassembid\",\"uiAssembId\":\"uiassembid\",\"updateDatetime\":\"1482565802817\",\"updateUserId\":\"user001\"}]"
+     * curl http://localhost:8081/api/V1/mlabel/all -i -XDELETE -H "Content-Type: application/json" -d "[{\"kigyouCd\":\"kgyo5\",\"attibuteId\":\"kokyaku\",\"labelId\":\"5\",\"color\":\"white\",\"creatDatetime\":\"1482565802817\",\"creatUserId\":\"user001\",\"deleteId\":\"0\",\"labelName\":\"osaka\",\"parentLabelId\":\"0\",\"serverAssembId\":\"serverassembid\",\"uiAssembId\":\"uiassembid\",\"updateDatetime\":\"1482565802817\",\"updateUserId\":\"user001\"},{\"kigyouCd\":\"kgyo6\",\"attibuteId\":\"kokyaku\",\"labelId\":\"6\",\"color\":\"white\",\"creatDatetime\":\"1482565802817\",\"creatUserId\":\"user001\",\"deleteId\":\"0\",\"labelName\":\"osaka\",\"parentLabelId\":\"0\",\"serverAssembId\":\"serverassembid\",\"uiAssembId\":\"uiassembid\",\"updateDatetime\":\"1482565802817\",\"updateUserId\":\"user001\"}]"
      *
      * refs #1 複数削除機能追加
      *

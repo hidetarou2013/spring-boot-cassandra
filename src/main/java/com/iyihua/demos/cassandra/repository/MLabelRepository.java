@@ -22,8 +22,8 @@ public interface MLabelRepository extends CassandraRepository<MLabel> {
 //	public Label findByLabelId(String kigyoCD,int labelID);
 
 	//案1－02の対応
-	@Query("SELECT * FROM mlabel WHERE companyCode =?0 and parentLabelCode=?1 and labelCode=?2 and labelDisplayOrders=?3")
-	public MLabel findByKeys(String companyCode,String parentLabelCode,String labelCode,int labelDisplayOrders);
+	@Query("SELECT * FROM mlabel WHERE companyCode =?0 and parentLabelCode=?1 and labelCode=?2 and labelDisplayOrder=?3")
+	public MLabel findByKeys(String companyCode,String parentLabelCode,String labelCode,int labelDisplayOrder);
 
 
 //	//案1－02のタグテーブル対応
@@ -34,8 +34,8 @@ public interface MLabelRepository extends CassandraRepository<MLabel> {
 	@Query("DELETE FROM mlabel WHERE labelName=?0")
 	public List<MLabel> deleteByLabelName(String labelName);
 
-	@Query("DELETE FROM mlabel WHERE companyCode =?0 and parentLabelCode=?1 and labelCode=?2 and labelDisplayOrders=?3")
-	public List<MLabel> deleteByLabelKeys(String companyCode,String parentLabelCode,String labelCode,int labelDisplayOrders);
+	@Query("DELETE FROM mlabel WHERE companyCode =?0 and parentLabelCode=?1 and labelCode=?2 and labelDisplayOrder=?3")
+	public List<MLabel> deleteByLabelKeys(String companyCode,String parentLabelCode,String labelCode,int labelDisplayOrder);
 
 
 }
