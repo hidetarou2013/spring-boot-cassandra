@@ -134,7 +134,7 @@ INSERT INTO sample.MLabel (companyCode, labelCode, labelName, color,parentLabelC
 INSERT INTO sample.MLabel (companyCode, labelCode, labelName, color,parentLabelCode,labelDisplayOrder, level1, level2, level3, level4, level5, analizeFlag,logicalDeleteDiv) VALUES ('AABBCC0000000001',  '0007', 'B-2-1','#FF0000','0006',  7, 0, 0,1,0,0,0,0);
 INSERT INTO sample.MLabel (companyCode, labelCode, labelName, color,parentLabelCode,labelDisplayOrder, level1, level2, level3, level4, level5, analizeFlag,logicalDeleteDiv) VALUES ('AABBCC0000000001',  '0008', 'C','#FF0000','0000',  8, 3, 0,0,0,0,0,0);
 
--- labelCodeÇtimeuuidÇ…ÇÕÇµÇƒÇ¢Ç»Ç¢ÉpÉ^Å[ÉìÅFvarchar
+-- labelCode„Çítimeuuid„Å´„ÅØ„Åó„Å¶„ÅÑ„Å™„ÅÑ„Éë„Çø„Éº„É≥Ôºövarchar
 DROP TABLE IF EXISTS sample.MLabel0307;
 CREATE TABLE IF NOT EXISTS sample.MLabel0307
 (
@@ -172,7 +172,7 @@ INSERT INTO sample.MLabel0307 (companyCode, labelCode, labelName, color,parentLa
 
 SELECT * FROM MLabel0307;
 
--- labelCodeÇtimeuuidÇ…Ç∑ÇÈÉpÉ^Å[Éì
+-- labelCode„Çítimeuuid„Å´„Åô„Çã„Éë„Çø„Éº„É≥
 DROP TABLE IF EXISTS sample.MLabel0307_2;
 CREATE TABLE IF NOT EXISTS sample.MLabel0307_2
 (
@@ -211,7 +211,7 @@ INSERT INTO sample.MLabel0307_2 (companyCode, labelCode, labelName, color,parent
 
 select companycode,toTimestamp(parentLabelCode),toTimestamp(labelcode),labelName,labelDisplayOrder,level1,level2,level3 from sample.MLabel0307_2 where companycode = 'AABBCC0000000001' ;
 
--- labelCodeÇintÇ…Ç∑ÇÈÉpÉ^Å[Éì
+-- labelCode„Çíint„Å´„Åô„Çã„Éë„Çø„Éº„É≥
 DROP TABLE IF EXISTS sample.MLabel0307_3;
 CREATE TABLE IF NOT EXISTS sample.MLabel0307_3
 (
