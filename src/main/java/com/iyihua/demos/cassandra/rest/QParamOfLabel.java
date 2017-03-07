@@ -1,13 +1,21 @@
 package com.iyihua.demos.cassandra.rest;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.UUID;
 
+import org.springframework.web.bind.annotation.PathVariable;
+
+import com.datastax.driver.core.utils.UUIDs;
 import com.iyihua.demos.cassandra.domain.Label;
+import com.iyihua.demos.cassandra.domain.MLabel0307_2;
 
 public class QParamOfLabel {
 
@@ -54,6 +62,94 @@ public class QParamOfLabel {
 		obj.initListQKeys(3);
 		obj.initMapQParam(input);
 		obj.initMapQParamLabel();
+
+		testes();
+	}
+
+	private static void testes() {
+		// TODO 自動生成されたメソッド・スタブ
+			//debug
+			System.out.println("findOne");
+			String id = "AABBCC0000000001_2017-01-01.00:00:06+0000_2017-03-07.01:00:06+0000_1";
+	    	String[] pathvals = id.split("_", -1);
+	    	String companyCode = pathvals[0];
+	    	String parentLabelCode = pathvals[1];
+	    	String labelCode = pathvals[2];
+	    	int labelDisplayOrder = Integer.parseInt(pathvals[3]);
+			System.out.println(companyCode + "/" + parentLabelCode + "/" + labelCode + "/" + labelDisplayOrder);
+
+			UUID uuid_parentLabelCode = getUUIDFromStringTime(parentLabelCode);
+			UUID uuid_labelCode = getUUIDFromStringTime(labelCode);
+
+			// UUID <=> String
+			UUID tmp1 = getUUIDFromString("d09f860f-cf69-11e6-7f7f-7f7f7f7f7f7f");
+			System.out.println(tmp1);
+			String strTmp1 = getStringFromUUID(tmp1);
+			System.out.println(strTmp1);
+			Date dateTmp1 = getDateFromUUID(tmp1);
+			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			//sf.format(dateTmp1);
+			System.out.println(sf.format(dateTmp1));
+
+	}
+
+
+	private static Date getDateFromUUID(UUID uuid_input){
+		return new Date(uuid_input.timestamp());
+	}
+
+
+	/**
+	 * UUID -> String
+	 * [d09f860f-cf69-11e6-7f7f-7f7f7f7f7f7f] -> [d09f860f-cf69-11e6-7f7f-7f7f7f7f7f7f]
+	 *
+	 * @param uuid_input
+	 * @return
+	 */
+	private static String getStringFromUUID(UUID uuid_input){
+		return uuid_input.toString();
+	}
+
+	/**
+	 * String -> UUID
+	 * [d09f860f-cf69-11e6-7f7f-7f7f7f7f7f7f] -> [d09f860f-cf69-11e6-7f7f-7f7f7f7f7f7f]
+	 *
+	 * @param parentLabelCode
+	 * @return
+	 */
+	private static UUID getUUIDFromString(String parentLabelCode) {
+		return UUID.fromString(parentLabelCode);
+	}
+
+	/**
+	 * String -> UUID
+	 * [2017-01-01.00:00:06+0000] -> [d09f860f-cf69-11e6-7f7f-7f7f7f7f7f7f]
+	 *
+	 * @param parentLabelCode
+	 * @return
+	 */
+	private static UUID getUUIDFromStringTime(String parentLabelCode) {
+		String[] tmpArr1_plcd = parentLabelCode.split("\\.",-1);System.out.println(tmpArr1_plcd[0]);
+		String[] tmpArr2_plcd = tmpArr1_plcd[0].split("-",-1);System.out.println(tmpArr1_plcd[1]);
+		String[] tmpArr3_plcd = tmpArr1_plcd[1].split(":",-1);System.out.println(tmpArr3_plcd[2]);
+		String[] tmpArr4_plcd = tmpArr3_plcd[2].split("\\+",-1);System.out.println(tmpArr4_plcd[1]);
+		Calendar cal_parentLabelCode = Calendar.getInstance();
+		cal_parentLabelCode.set(
+				 Integer.parseInt(tmpArr2_plcd[0])
+				,Integer.parseInt(tmpArr2_plcd[1])-1
+				,Integer.parseInt(tmpArr2_plcd[2])
+				,Integer.parseInt(tmpArr3_plcd[0])
+				,Integer.parseInt(tmpArr3_plcd[1])
+				,Integer.parseInt(tmpArr4_plcd[0])
+		);
+		cal_parentLabelCode.set(Calendar.MILLISECOND, Integer.parseInt(tmpArr4_plcd[1]));
+		long timestamp_parentLabelCode = cal_parentLabelCode.getTimeInMillis();
+		UUID uuid_parentLabelCode = UUIDs.endOf(timestamp_parentLabelCode);
+
+		System.out.println(tmpArr2_plcd[0] + "/" + tmpArr2_plcd[1] + "/" + tmpArr2_plcd[2] + "/" + tmpArr3_plcd[0] + "/" + tmpArr3_plcd[1] + "/" + tmpArr4_plcd[0] + "/" + tmpArr4_plcd[1]);
+		System.out.println(uuid_parentLabelCode);
+
+		return uuid_parentLabelCode;
 	}
 
 	public void init(int size,String q_param){
